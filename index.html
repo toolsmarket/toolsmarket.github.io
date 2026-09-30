@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools Market - প্রিমিয়াম ডিজিটাল টুলস ও সার্ভিস মার্কেটপ্লেস</title>
+  <style>
+    :root {
+      --primary-cyan: #00d2ff;
+      --primary-blue: #0066ff;
+      --primary-purple: #9b51e0;
+      --accent-magenta: #e024c3;
+      --dark-bg: #090d16;
+      --card-bg: #131a29;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* হিরো ব্যানার */
+    header {
+      background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(155, 81, 224, 0.2)), #0b1120;
+      border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .brand-logo {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple), var(--accent-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    /* সেকশন হেডিং */
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin: 40px 0 25px;
+      color: #fff;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple));
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    /* গ্রিড লেআউট */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    /* কার্ড ডিজাইন */
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-cyan);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple));
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .price-tag {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--primary-cyan);
+      margin-bottom: 15px;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-bottom: 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .features-list li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .features-list li span {
+      color: var(--primary-cyan);
+    }
+
+    /* অর্ডার বাটন */
+    .btn-order {
+      display: block;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+      color: white;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+
+    .btn-order:hover {
+      opacity: 0.9;
+    }
+
+    /* হাইলাইট ব্যাজ */
+    .badge {
+      display: inline-block;
+      background: rgba(0, 210, 255, 0.15);
+      color: var(--primary-cyan);
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    /* ফুটার ও কল টু একশন */
+    footer {
+      background: #060a12;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      padding: 50px 20px;
+      margin-top: 50px;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      background: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- হিরো সেকশন -->
+  <header>
+    <div class="brand-logo">TM</div>
+    <h1>Tools Market</h1>
+    <p>প্রিমিয়াম ডিজিটাল টুলস ও ভেরিফাইড সার্ভিস মার্কেটপ্লেস। আপনার বিশ্বাস ও নির্ভরযোগ্য সেবাই আমাদের মূল লক্ষ্য।</p>
+    <a href="https://wa.me/8801820232076" class="whatsapp-btn" target="_blank">সরাসরি হোয়াটসঅ্যাপে কথা বলুন</a>
+  </header>
+
+  <div class="container">
+
+    <!-- ক্যাটাগরি ১: এআই প্রিমিয়াম টুলস ও সাবস্ক্রিপশন -->
+    <h2 class="section-title">প্রিমিয়াম এআই ও ক্রিয়েটিভ টুলস</h2>
+    <div class="grid">
+
+      <!-- Gemini AI -->
+      <div class="card">
+        <div>
+          <span class="badge">হাই ডিমান্ড</span>
+          <h3>Gemini AI Pro</h3>
+          <div class="price-tag">১৮ মাসের প্রিমিয়াম অ্যাক্সেস</div>
+          <ul class="features-list">
+            <li><span>✔</span> ৫ টিবি (5TB) ক্লাউড স্টোরেজ সহ</li>
+            <li><span>✔</span> অ্যাডভান্সড এআই রিসার্চ ও প্রম্পট সাপোর্ট</li>
+            <li><span>✔</span> ফুল মেয়াদ রিপ্লেসমেন্ট গ্যারান্টি</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20Gemini%2018%20Months%20নিতে%20চাই" class="btn-order" target="_blank">অর্ডার করুন</a>
+      </div>
+
+      <!-- Canva Pro -->
+      <div class="card">
+        <div>
+          <span class="badge">পার্সোনাল মেইল</span>
+          <h3>Canva Pro (ক্যানভা প্রো)</h3>
+          <div class="price-tag">৬ মাস / ১ বছর প্যাকেজ</div>
+          <ul class="features-list">
+            <li><span>✔</span> আপনার নিজস্ব পার্সোনাল জিমেইলে অ্যাক্টিভ</li>
+            <li><span>✔</span> আনলিমিটেড প্রিমিয়াম টেমপ্লেট ও গ্রাফিক্স</li>
+            <li><span>✔</span> ব্র্যান্ড কিট ও ফুল রিপ্লেসমেন্ট সাপোর্ট</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20Canva%20Pro%20নিতে%20চাই" class="btn-order" target="_blank">অর্ডার করুন</a>
+      </div>
+
+      <!-- CapCut Pro -->
+      <div class="card">
+        <div>
+          <span class="badge">ভিডিও এডিটিং</span>
+          <h3>CapCut Pro (ক্যাপকাট প্রো)</h3>
+          <div class="price-tag">১ মাসের সাবস্ক্রিপশন</div>
+          <ul class="features-list">
+            <li><span>✔</span> পিসি ও মোবাইল উভয় ডিভাইসে ব্যবহার উপযোগী</li>
+            <li><span>✔</span> সব প্রো ইফেক্ট, ট্রানজিশন ও ৪K এক্সপোর্ট</li>
+            <li><span>✔</span> ফুল ওয়ারেন্টি সাপোর্ট</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20CapCut%20Pro%20নিতে%20চাই" class="btn-order" target="_blank">অর্ডার করুন</a>
+      </div>
+
+    </div>
+
+    <!-- ক্যাটাগরি ২: কম্বো প্যাকেজ -->
+    <h2 class="section-title">স্পেশাল কম্বো প্যাকেজ (Study & Research)</h2>
+    <div class="grid">
+
+      <!-- Silver Package -->
+      <div class="card">
+        <div>
+          <span class="badge">বেসিক কম্বো</span>
+          <h3>SILVER PACKAGE</h3>
+          <div class="price-tag">৳২৪৯ / মাসিক</div>
+          <ul class="features-list">
+            <li><span>✔</span> চ্যাটজিপিটি প্লাস (Updated)</li>
+            <li><span>✔</span> হিউম্যানাইজার / বাইপাস টুল</li>
+            <li><span>✔</span> কুইলবট প্রিমিয়াম</li>
+            <li><span>✔</span> গ্রামারলি প্রিমিয়াম</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20Silver%20Combo%20Package%20নিতে%20চাই" class="btn-order" target="_blank">অর্ডার করুন</a>
+      </div>
+
+      <!-- Master Package -->
+      <div class="card">
+        <div>
+          <span class="badge">জনপ্রিয় চয়েস</span>
+          <h3>AI MASTER PACKAGE</h3>
+          <div class="price-tag">৳৩৪৯ / মাসিক</div>
+          <ul class="features-list">
+            <li><span>✔</span> চ্যাটজিপিটি প্লাস + কুইলবট + গ্রামারলি</li>
+            <li><span>✔</span> পারপ্লেক্সিটি প্রো (Deep Research)</li>
+            <li><span>✔</span> পেপারপাল ও ক্যানভা প্রো যুক্ত</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20AI%20Master%20Package%20নিতে%20চাই" class="btn-order" target="_blank">অর্ডার করুন</a>
+      </div>
+
+      <!-- Platinum Package -->
+      <div class="card">
+        <div>
+          <span class="badge">অল-ইন-ওয়ান</span>
+          <h3>PLATINUM PACKAGE</h3>
+          <div class="price-tag">৳৭৯৯ / মাসিক</div>
+          <ul class="features-list">
+            <li><span>✔</span> টার্নিটিন ইন্সট্রাক্টর (Ai & Plagiarism Check)</li>
+            <li><span>✔</span> স্টিলথ রাইটার (Daily 15 Humanize)</li>
+            <li><span>✔</span> পারপ্লেক্সিটি প্রো, জেমিনি, গ্রোক ও স্কিলশেয়ার</li>
+            <li><span>✔</span> সাথে আরও ৫টি বোনাস টুলস</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20Platinum%20Package%20নিতে%20চাই" class="btn-order" target="_blank">অর্ডার করুন</a>
+      </div>
+
+    </div>
+
+    <!-- ক্যাটাগরি ৩: সোশ্যাল মিডিয়া ও ভেরিফিকেশন সার্ভিস -->
+    <h2 class="section-title">ভেরিফিকেশন ও মার্কেটিং সার্ভিস</h2>
+    <div class="grid">
+
+      <!-- Facebook Verified Service -->
+      <div class="card">
+        <div>
+          <span class="badge">সোশ্যাল মিডিয়া</span>
+          <h3>FB আইডি ও পেজ ভেরিফিকেশন</h3>
+          <div class="price-tag">মেটা ব্লু টিক ভেরিফাইড সার্ভিস</div>
+          <ul class="features-list">
+            <li><span>✔</span> ১০০% নিরাপদ ও লিগ্যাল মেথড</li>
+            <li><span>✔</span> পার্সোনাল প্রোফাইল বা বিজনেস পেজ সেটআপ</li>
+            <li><span>✔</span> ফুল সাপোর্ট ও গাইডলাইন</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20Facebook%20Verification%20সার্ভিস%20সম্পর্কে%20জানতে%20চাই" class="btn-order" target="_blank">যোগাযোগ করুন</a>
+      </div>
+
+      <!-- Business Manager Verified -->
+      <div class="card">
+        <div>
+          <span class="badge">বিজ্ঞাপন ও ব্যবসা</span>
+          <h3>Verified Business Manager (BM)</h3>
+          <div class="price-tag">গ্রিন ব্যাজ ভেরিফাইড BM</div>
+          <ul class="features-list">
+            <li><span>✔</span> ফেসবুক অ্যাড লিমিট ছাড়া রান করার সুবিধা</li>
+            <li><span>✔</span> ব্যান বা রেস্ট্রিকশন মুক্ত সুরক্ষিত BM</li>
+            <li><span>✔</span> ইনস্ট্যান্ট ট্রান্সফার সাপোর্ট</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20Verified%20BM%20নিতে%20চাই" class="btn-order" target="_blank">যোগাযোগ করুন</a>
+      </div>
+
+      <!-- Phone/PIN & VPN -->
+      <div class="card">
+        <div>
+          <span class="badge">সিকিউরিটি ও পিন</span>
+          <h3>ভেরিফাইড পিন নাম্বার ও ভিপিএন</h3>
+          <div class="price-tag">Nord / Express VPN ও ওটিপি পিন</div>
+          <ul class="features-list">
+            <li><span>✔</span> সব ধরনের অ্যাকাউন্ট ভেরিফিকেশনের জন্য রিয়েল পিন</li>
+            <li><span>✔</span> হাই স্পিড প্রিমিয়াম ভিপিএন সাবস্ক্রিপশন</li>
+            <li><span>✔</span> রিপ্লেসমেন্ট ওয়ারেন্টি</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/8801820232076?text=আমি%20PIN%20বা%20VPN%20সার্ভিস%20নিতে%20চাই" class="btn-order" target="_blank">অর্ডার করুন</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ফুটার -->
+  <footer>
+    <h2>প্রয়োজনীয় কোনো টুলস বা সার্ভিস তালিকায় নেই?</h2>
+    <p>যেকোনো স্পেশাল রিকোয়ারমেন্ট বা বাল্ক অর্ডারের জন্য আমাদের ইনবক্স করুন।</p>
+    <a href="https://wa.me/8801820232076" class="whatsapp-btn" target="_blank">হোয়াটসঅ্যাপ: +880 1820-232076</a>
+    <p style="margin-top: 30px; font-size: 0.85rem; color: var(--text-muted);">© Tools Market. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>

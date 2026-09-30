@@ -7,18 +7,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg-color: #0b0f19;
-      --card-bg: rgba(22, 27, 46, 0.85);
-      --card-border: rgba(99, 102, 241, 0.25);
-      --primary-accent: #6366f1;
-      --secondary-accent: #a855f7;
+      --bg-color: #070a13;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --primary-cyan: #00f2fe;
+      --primary-blue: #4facfe;
+      --primary-purple: #9333ea;
+      --accent-pink: #f43f5e;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --whatsapp-green: #25d366;
-      --tag-bg: #1e1b4b;
-      --tag-text: #818cf8;
       --gold-accent: #f59e0b;
-      --gold-bg: rgba(245, 158, 11, 0.15);
+      --gold-gradient: linear-gradient(135deg, #f59e0b, #fbbf24, #d97706);
     }
 
     * {
@@ -32,48 +31,65 @@
       background-color: var(--bg-color);
       color: var(--text-main);
       line-height: 1.6;
-      padding-bottom: 60px;
+      overflow-x: hidden;
+      padding-bottom: 50px;
     }
 
-    @keyframes fadeInDown {
+    /* Background Ambient Glow */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle at 20% 15%, rgba(79, 172, 254, 0.12), transparent 40%),
+                  radial-gradient(circle at 80% 60%, rgba(147, 51, 234, 0.12), transparent 40%),
+                  radial-gradient(circle at 50% 90%, rgba(0, 242, 254, 0.08), transparent 40%);
+    }
+
+    /* Keyframe Animations */
+    @keyframes glowPulse {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.4)); }
+      50% { filter: drop-shadow(0 0 30px rgba(147, 51, 234, 0.7)); }
+    }
+
+    @keyframes textGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes cardFadeUp {
       from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(35px) scale(0.97);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
+    /* Header Section */
     header {
       text-align: center;
-      padding: 45px 20px 25px;
-      animation: fadeInDown 0.8s ease-out;
+      padding: 50px 20px 30px;
     }
 
     .logo-container {
-      width: 95px;
-      height: 95px;
-      margin: 0 auto 15px;
+      width: 105px;
+      height: 105px;
+      margin: 0 auto 20px;
       border-radius: 50%;
-      background: radial-gradient(circle, #1e1b4b 0%, #0b0f19 100%);
-      border: 2px solid var(--primary-accent);
+      background: radial-gradient(circle, #1e1b4b 0%, #070a13 100%);
+      border: 2px solid rgba(0, 242, 254, 0.7);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.45);
+      animation: glowPulse 4s infinite ease-in-out;
       overflow: hidden;
     }
 
@@ -85,171 +101,224 @@
 
     .logo-fallback {
       font-weight: 800;
-      font-size: 1.6rem;
-      color: var(--text-main);
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 700;
       letter-spacing: 1px;
+      text-transform: uppercase;
+      background: rgba(79, 172, 254, 0.12);
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      color: var(--primary-cyan);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+      margin-bottom: 12px;
     }
 
     header h1 {
-      font-size: 2.3rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #fff, #94a3b8);
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #ffffff, #00f2fe, #9333ea, #ffffff);
+      background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 8px;
+      animation: textGradient 6s ease infinite;
+      margin-bottom: 10px;
     }
 
     header p {
       color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 20px;
-      font-size: 0.95rem;
+      max-width: 620px;
+      margin: 0 auto 22px;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .whatsapp-btn-top {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background-color: var(--whatsapp-green);
+      background: linear-gradient(135deg, #25d366, #128c7e);
       color: #fff;
-      padding: 12px 28px;
+      padding: 13px 32px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 700;
       font-size: 0.95rem;
-      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 25px rgba(37, 211, 102, 0.45);
+      transition: all 0.3s ease;
     }
 
     .whatsapp-btn-top:hover {
-      transform: scale(1.04);
-      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 20px;
     }
 
+    /* Section Heading Styles */
     .section-header {
       text-align: center;
-      margin: 45px 0 25px;
+      margin: 55px 0 30px;
     }
 
     .section-header h2 {
       display: inline-block;
-      font-size: 1.5rem;
+      font-size: 1.65rem;
       font-weight: 800;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      background: linear-gradient(90deg, #38bdf8, #c084fc, #38bdf8);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      padding-bottom: 6px;
+      animation: textGradient 5s linear infinite;
       position: relative;
+      padding-bottom: 10px;
     }
 
     .section-header h2::after {
       content: '';
       position: absolute;
       bottom: 0;
-      left: 15%;
-      width: 70%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 65%;
       height: 3px;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
-      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, #38bdf8, #c084fc, transparent);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+      border-radius: 3px;
     }
 
+    /* Grid Layout */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
       gap: 25px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+    }
+
+    /* Modern Neon Border Card Styles */
+    .card-wrapper {
+      position: relative;
+      border-radius: 20px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.4), rgba(147, 51, 234, 0.2), rgba(255, 255, 255, 0.05));
+      animation: cardFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+    }
+
+    .card-wrapper:hover {
+      transform: translateY(-8px);
+      background: linear-gradient(135deg, #00f2fe, #9333ea, #f43f5e);
+      box-shadow: 0 10px 35px rgba(0, 242, 254, 0.35), 0 0 20px rgba(147, 51, 234, 0.3);
+    }
+
+    .card-wrapper.gold-border {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.7), rgba(251, 191, 36, 0.3), rgba(217, 119, 6, 0.1));
+    }
+
+    .card-wrapper.gold-border:hover {
+      background: var(--gold-gradient);
+      box-shadow: 0 12px 40px rgba(245, 158, 11, 0.45);
     }
 
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
+      border-radius: 19px;
       padding: 24px;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      animation: fadeInUp 0.8s ease-out;
-      position: relative;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(99, 102, 241, 0.6);
-      box-shadow: 0 12px 35px rgba(99, 102, 241, 0.2);
-    }
-
-    .card.highlight-gold {
-      border-color: rgba(245, 158, 11, 0.4);
-    }
-
-    .card.highlight-gold:hover {
-      border-color: rgba(245, 158, 11, 0.8);
-      box-shadow: 0 12px 35px rgba(245, 158, 11, 0.25);
+      backdrop-filter: blur(14px);
     }
 
     .tag {
       align-self: flex-start;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      font-size: 0.75rem;
+      background: rgba(79, 172, 254, 0.12);
+      color: var(--primary-cyan);
+      font-size: 0.78rem;
       font-weight: 700;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
-      margin-bottom: 12px;
-      border: 1px solid rgba(129, 140, 248, 0.2);
+      margin-bottom: 14px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
     }
 
     .tag.gold {
-      background: var(--gold-bg);
+      background: rgba(245, 158, 11, 0.15);
       color: var(--gold-accent);
-      border-color: rgba(245, 158, 11, 0.3);
+      border-color: rgba(245, 158, 11, 0.4);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+    }
+
+    .tag.pink {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--accent-pink);
+      border-color: rgba(244, 63, 94, 0.4);
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
     }
 
     .card h3 {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
+      font-weight: 700;
       margin-bottom: 6px;
       color: #fff;
     }
 
     .price-tag {
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: #38bdf8;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
+      text-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
     }
 
     .price-tag.gold {
       color: var(--gold-accent);
+      text-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
     }
 
     .validity-list {
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px dashed rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 15px;
-      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      font-size: 0.88rem;
     }
 
     .validity-list div {
       display: flex;
       justify-content: space-between;
       color: #cbd5e1;
-      padding: 2px 0;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .validity-list div:last-child {
+      border-bottom: none;
     }
 
     .validity-list span.val-price {
       font-weight: 700;
       color: #38bdf8;
+    }
+
+    .validity-list.gold-list span.val-price {
+      color: var(--gold-accent);
     }
 
     .features {
@@ -261,295 +330,466 @@
     .features li {
       font-size: 0.88rem;
       color: #cbd5e1;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
       display: flex;
       align-items: flex-start;
-      gap: 8px;
+      gap: 10px;
     }
 
     .features li i {
-      color: #38bdf8;
-      font-size: 0.8rem;
+      color: #00f2fe;
+      font-size: 0.85rem;
       margin-top: 4px;
+      filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.6));
     }
 
     .features li i.gold-icon {
       color: var(--gold-accent);
+      filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
     }
 
     .order-btn {
       display: block;
       width: 100%;
       text-align: center;
-      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
-      color: #fff;
-      padding: 12px;
-      border-radius: 10px;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: #030712;
+      padding: 13px;
+      border-radius: 12px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 0.95rem;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.35);
     }
 
     .order-btn:hover {
-      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.45);
+      box-shadow: 0 6px 25px rgba(0, 242, 254, 0.65);
       transform: translateY(-2px);
     }
 
     .order-btn.gold-btn {
-      background: linear-gradient(135deg, #d97706, #f59e0b);
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+      background: var(--gold-gradient);
+      color: #000;
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4);
+    }
+
+    .order-btn.gold-btn:hover {
+      box-shadow: 0 6px 28px rgba(245, 158, 11, 0.7);
+    }
+
+    /* Customer Reviews Slider Section */
+    .reviews-section {
+      margin-top: 65px;
+      text-align: center;
+    }
+
+    .slider-container {
+      position: relative;
+      max-width: 850px;
+      margin: 25px auto 0;
+      overflow: hidden;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.4), rgba(147, 51, 234, 0.4));
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .slide {
+      min-width: 100%;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .slide img {
+      max-width: 100%;
+      max-height: 380px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      object-fit: contain;
+    }
+
+    .slide-placeholder {
+      width: 100%;
+      height: 260px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      padding: 20px;
+    }
+
+    .slide-placeholder i {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      color: var(--primary-cyan);
+    }
+
+    .slider-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .slider-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .slider-btn:hover {
+      background: var(--primary-cyan);
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
     }
 
     footer {
       text-align: center;
-      padding: 30px 20px 10px;
+      padding: 40px 20px 10px;
       color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: 40px;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-top: 60px;
     }
 
     .footer-whatsapp {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(37, 211, 102, 0.15);
+      background: rgba(37, 211, 102, 0.12);
       color: var(--whatsapp-green);
-      padding: 8px 18px;
-      border-radius: 20px;
+      padding: 9px 22px;
+      border-radius: 25px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       margin-top: 12px;
-      border: 1px solid rgba(37, 211, 102, 0.3);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.15);
     }
   </style>
 </head>
 <body>
 
+  <div class="ambient-bg"></div>
+
+  <!-- Header -->
   <header>
     <div class="logo-container">
       <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
       <div class="logo-fallback" style="display:none;">TM</div>
     </div>
+    <div class="brand-badge"><i class="fas fa-bolt"></i> ১০০০% ট্রাস্টেড ও অফিসিয়াল সার্ভিস</div>
     <h1>Tools Market</h1>
     <p>প্রিমিয়াম ডিজিটাল টুলস ও ভেরিফাইড সার্ভিস মার্কেটপ্লেস। আপনার বিশ্বাস ও নির্ভরযোগ্যতাই আমাদের মূল লক্ষ্য।</p>
     <a href="https://wa.me/8801820232076?text=Hello,%20I%20want%20to%20know%20about%20your%20services" target="_blank" class="whatsapp-btn-top">
-      <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> সরাসরি হোয়াটসঅ্যাপে কথা বলুন
+      <i class="fab fa-whatsapp" style="font-size: 1.25rem;"></i> সরাসরি হোয়াটসঅ্যাপে কথা বলুন
     </a>
   </header>
 
   <div class="container">
 
-    <!-- সাশ্রয়ী কম্বো প্যাকেজ সমূহ -->
+    <!-- সেকশন ১: মোস্ট পপুলার ৩টি টুলস (Gemini 18 মাস, CapCut, Canva) -->
     <div class="section-header">
-      <h2>স্পেশাল কম্বো প্যাকেজ (Study & Research)</h2>
+      <h2>🔥 মোস্ট পপুলার প্রিমিয়াম টুলস</h2>
+    </div>
+
+    <div class="grid">
+      <!-- 1. Gemini AI Pro -->
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">⭐ হাই ডিমান্ড টুল</span>
+          <h3>Gemini AI Pro</h3>
+          <div class="price-tag">১৮ মাসের প্রিমিয়াম অ্যাক্সেস</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> ৫ টিবি (5TB) ক্লাউড স্টোরেজ সহ</li>
+            <li><i class="fas fa-check-circle"></i> অ্যাডভান্সড এআই রিসার্চ ও প্রম্পট সাপোর্ট</li>
+            <li><i class="fas fa-check-circle"></i> ফুল মেয়াদ রিপ্লেসমেন্ট গ্যারান্টি</li>
+            <li><i class="fas fa-check-circle"></i> হাই স্পিড ডেডিকেটেড পারফরম্যান্স</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Gemini%20AI%20Pro" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
+      </div>
+
+      <!-- 2. CapCut Pro -->
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">🎬 বেস্ট ভিডিও এডিটর</span>
+          <h3>CapCut Pro (ক্যাপকাট প্রো)</h3>
+          <div class="price-tag">১ মাসের সাবস্ক্রিপশন</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> পিসি ও মোবাইল উভয় ডিভাইসে স্মুথ ব্যবহার</li>
+            <li><i class="fas fa-check-circle"></i> সব প্রো ইফেক্ট, ফিল্টার, ট্রানজিশন আনলক</li>
+            <li><i class="fas fa-check-circle"></i> 4K এক্সপোর্ট ও ওয়াটারমার্ক ছাড়া আউটপুট</li>
+            <li><i class="fas fa-check-circle"></i> ফুল ওয়ারেন্টি ও ইনস্ট্যান্ট ডেলিভারি</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20CapCut%20Pro" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
+      </div>
+
+      <!-- 3. Canva Pro -->
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">🎨 পার্সোনাল মেইল অ্যাক্টিভ</span>
+          <h3>Canva Pro (ক্যানভা প্রো)</h3>
+          <div class="price-tag">৬ মাস / ১ বছর প্যাকেজ</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> আপনার নিজস্ব পার্সোনাল জিমেইলে অ্যাক্টিভেশন</li>
+            <li><i class="fas fa-check-circle"></i> আনলিমিটেড প্রিমিয়াম টেমপ্লেট ও গ্রাফিক্স</li>
+            <li><i class="fas fa-check-circle"></i> ব্র্যান্ড কিট ও ফুল রিপ্লেসমেন্ট সাপোর্ট</li>
+            <li><i class="fas fa-check-circle"></i> ১০০% নিরাপদ ও লিগ্যাল মেথড</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Canva%20Pro" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- সেকশন ২: স্পেশাল কম্বো প্যাকেজ সমূহ -->
+    <div class="section-header">
+      <h2>💎 স্পেশাল কম্বো প্যাকেজ (Study, Thesis & Research)</h2>
     </div>
 
     <div class="grid">
       <!-- SILVER PACKAGE -->
-      <div class="card">
-        <span class="tag">বেসিক কম্বো</span>
-        <h3>SILVER PACKAGE</h3>
-        <div class="price-tag">২৪৯৳ / মাসিক</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated)</li>
-          <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস</li>
-          <li><i class="fas fa-check-circle"></i> কুইলবট প্রিমিয়াম</li>
-          <li><i class="fas fa-check-circle"></i> গ্রামারলি প্রিমিয়াম</li>
-          <li><i class="fas fa-check-circle"></i> সর্বোচ্চ আপটাইম ও ফাস্ট সাপোর্ট</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Silver%20Package" target="_blank" class="order-btn">অর্ডার করুন</a>
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">বেসিক কম্বো</span>
+          <h3>SILVER PACKAGE</h3>
+          <div class="price-tag">২৪৯৳ / মাসিক</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated)</li>
+            <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস</li>
+            <li><i class="fas fa-check-circle"></i> কুইলবট প্রিমিয়াম</li>
+            <li><i class="fas fa-check-circle"></i> গ্রামারলি প্রিমিয়াম</li>
+            <li><i class="fas fa-check-circle"></i> সর্বোচ্চ আপটাইম ও ২৪/৭ ফাস্ট সাপোর্ট</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Silver%20Package" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
       </div>
 
       <!-- AI MASTER PACKAGE -->
-      <div class="card">
-        <span class="tag">জনপ্রিয় চয়েস</span>
-        <h3>AI MASTER PACKAGE</h3>
-        <div class="price-tag">৩৪৯৳ / মাসিক</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated)</li>
-          <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস</li>
-          <li><i class="fas fa-check-circle"></i> কুইলবট প্রিমিয়াম</li>
-          <li><i class="fas fa-check-circle"></i> গ্রামারলি প্রিমিয়াম</li>
-          <li><i class="fas fa-check-circle"></i> পারপ্লেক্সিটি প্রো (Deep Research)</li>
-          <li><i class="fas fa-check-circle"></i> পেপারপাল</li>
-          <li><i class="fas fa-check-circle"></i> ক্যানভা প্রো</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20AI%20Master%20Package" target="_blank" class="order-btn">অর্ডার করুন</a>
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">জনপ্রিয় চয়েস</span>
+          <h3>AI MASTER PACKAGE</h3>
+          <div class="price-tag">৩৪৯৳ / মাসিক</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated)</li>
+            <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস</li>
+            <li><i class="fas fa-check-circle"></i> কুইলবট প্রিমিয়াম</li>
+            <li><i class="fas fa-check-circle"></i> গ্রামারলি প্রিমিয়াম</li>
+            <li><i class="fas fa-check-circle"></i> পারপ্লেক্সিটি প্রো (Deep Research)</li>
+            <li><i class="fas fa-check-circle"></i> পেপারপাল</li>
+            <li><i class="fas fa-check-circle"></i> ক্যানভা প্রো</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20AI%20Master%20Package" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
       </div>
 
       <!-- GOLDEN PACKAGE -->
-      <div class="card highlight-gold">
-        <span class="tag gold">💎 মোস্ট ডিমান্ডেড</span>
-        <h3>GOLDEN PACKAGE</h3>
-        <div class="price-tag gold">৪৪৯৳ / মাসিক</div>
-        <div class="validity-list">
-          <div><span>১ মাস:</span> <span class="val-price">৪৪৯৳</span></div>
-          <div><span>৩ মাস:</span> <span class="val-price">১১৯৯৳</span></div>
-          <div><span>৬ মাস:</span> <span class="val-price">২০৯৯৳</span></div>
-          <div><span>১ বছর:</span> <span class="val-price">৩৯৫০৳</span></div>
+      <div class="card-wrapper gold-border">
+        <div class="card">
+          <span class="tag gold">👑 বেস্ট ভ্যালু গোল্ডেন কম্বো</span>
+          <h3>GOLDEN PACKAGE</h3>
+          <div class="price-tag gold">৪৪৯৳ / মাসিক</div>
+          <div class="validity-list gold-list">
+            <div><span>১ মাস:</span> <span class="val-price">৪৪৯৳</span></div>
+            <div><span>৩ মাস:</span> <span class="val-price">১১৯৯৳</span></div>
+            <div><span>৬ মাস:</span> <span class="val-price">২০৯৯৳</span></div>
+            <div><span>১ বছর:</span> <span class="val-price">৩৯৫০৳</span></div>
+          </div>
+          <ul class="features">
+            <li><i class="fas fa-shield-alt gold-icon"></i> টার্নিটিন ইন্সট্রাক্টর (Ai & Similarity 1 File Check)</li>
+            <li><i class="fas fa-check-circle gold-icon"></i> চ্যাটজিপিটি প্লাস (Updated জিপিটি ৫)</li>
+            <li><i class="fas fa-check-circle gold-icon"></i> হিক্স বাইপাস</li>
+            <li><i class="fas fa-check-circle gold-icon"></i> কুইলবট প্রিমিয়াম</li>
+            <li><i class="fas fa-check-circle gold-icon"></i> গ্রামারলি প্রিমিয়াম</li>
+            <li><i class="fas fa-check-circle gold-icon"></i> পারপ্লেক্সিটি প্রো (Deep Research)</li>
+            <li><i class="fas fa-check-circle gold-icon"></i> পেপারপাল ও স্কিলশেয়ার</li>
+            <li><i class="fas fa-gift gold-icon"></i> সাথে ৩ টি আকর্ষণীয় টুলস বোনাস!</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Golden%20Package" target="_blank" class="order-btn gold-btn">অর্ডার করুন</a>
         </div>
-        <ul class="features">
-          <li><i class="fas fa-shield-alt gold-icon"></i> টার্নিটিন ইন্সট্রাক্টর (1 file check)</li>
-          <li><i class="fas fa-check-circle gold-icon"></i> চ্যাটজিপিটি প্লাস (Updated)</li>
-          <li><i class="fas fa-check-circle gold-icon"></i> হিক্স বাইপাস</li>
-          <li><i class="fas fa-check-circle gold-icon"></i> কুইলবট প্রিমিয়াম</li>
-          <li><i class="fas fa-check-circle gold-icon"></i> গ্রামারলি প্রিমিয়াম</li>
-          <li><i class="fas fa-check-circle gold-icon"></i> পারপ্লেক্সিটি প্রো (Deep Research)</li>
-          <li><i class="fas fa-check-circle gold-icon"></i> পেপারপাল ও স্কিলশেয়ার</li>
-          <li><i class="fas fa-gift gold-icon"></i> সাথে ৩ টি টুলস বোনাস!</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Golden%20Package" target="_blank" class="order-btn gold-btn">অর্ডার করুন</a>
       </div>
 
       <!-- PLATINUM PACKAGE -->
-      <div class="card">
-        <span class="tag">🚀 অল-ইন-ওয়ান</span>
-        <h3>PLATINUM PACKAGE</h3>
-        <div class="price-tag">৭৯৯৳ / মাসিক</div>
-        <div class="validity-list">
-          <div><span>১ মাস:</span> <span class="val-price">৭৯৯৳</span></div>
-          <div><span>৩ মাস:</span> <span class="val-price">২১৯৯৳</span></div>
-          <div><span>৬ মাস:</span> <span class="val-price">৪২৯৯৳</span></div>
-          <div><span>১ বছর:</span> <span class="val-price">৭৯৫০৳</span></div>
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">🚀 আল্টিমেট কম্বো</span>
+          <h3>PLATINUM PACKAGE</h3>
+          <div class="price-tag">৭৯৯৳ / মাসিক</div>
+          <div class="validity-list">
+            <div><span>১ মাস:</span> <span class="val-price">৭৯৯৳</span></div>
+            <div><span>৩ মাস:</span> <span class="val-price">২১৯৯৳</span></div>
+            <div><span>৬ মাস:</span> <span class="val-price">৪২৯৯৳</span></div>
+            <div><span>১ বছর:</span> <span class="val-price">৭৯৫০৳</span></div>
+          </div>
+          <ul class="features">
+            <li><i class="fas fa-shield-alt"></i> টার্নিটিন ইন্সট্রাক্টর (Ai & Similarity 2 File Check)</li>
+            <li><i class="fas fa-check-circle"></i> স্টেলথরাইটার (Per day 15 Humanize)</li>
+            <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated Version)</li>
+            <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস ও কুইলবট প্রিমিয়াম</li>
+            <li><i class="fas fa-check-circle"></i> গ্রামারলি ও পারপ্লেক্সিটি প্রো (ডীপ রিসার্চ)</li>
+            <li><i class="fas fa-check-circle"></i> পেপারপাল প্রাইম ও জেনি এ আই</li>
+            <li><i class="fas fa-check-circle"></i> গ্রোক সুপার, স্কিল শেয়ার ও ক্যানভা</li>
+            <li><i class="fas fa-gift"></i> সাথে আরো স্পেশাল বোনাস টুলস!</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Platinum%20Package" target="_blank" class="order-btn">অর্ডার করুন</a>
         </div>
-        <ul class="features">
-          <li><i class="fas fa-shield-alt"></i> টার্নিটিন ইন্সট্রাক্টর (2 file check)</li>
-          <li><i class="fas fa-check-circle"></i> স্টেলথরাইটার (Per day 15 Humanize)</li>
-          <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated)</li>
-          <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস ও কুইলবট প্রিমিয়াম</li>
-          <li><i class="fas fa-check-circle"></i> গ্রামারলি ও পারপ্লেক্সিটি প্রো</li>
-          <li><i class="fas fa-check-circle"></i> পেপারপাল প্রাইম ও জেনি এ আই</li>
-          <li><i class="fas fa-check-circle"></i> গ্রোক সুপার, স্কিল শেয়ার ও ক্যানভা</li>
-          <li><i class="fas fa-gift"></i> সাথে আরো স্পেশাল বোনাস টুলস</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Platinum%20Package" target="_blank" class="order-btn">অর্ডার করুন</a>
       </div>
     </div>
 
-    <!-- বিশেষ AI টুলস -->
+
+    <!-- সেকশন ৩: বিশেষ সিঙ্গেল ও সিকিউরিটি সার্ভিস -->
     <div class="section-header">
-      <h2>স্পেশাল সিঙ্গেল AI ও ক্রিয়েটিভ টুলস</h2>
+      <h2>🛡️ স্পেশাল সিঙ্গেল AI ও সিকিউরিটি সার্ভিস</h2>
     </div>
 
     <div class="grid">
       <!-- StealthWriter -->
-      <div class="card">
-        <span class="tag">🔥 ১০০% Humanize</span>
-        <h3>StealthWriter</h3>
-        <div class="price-tag">৩৯৯৳ / মাসিক</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> AI লেখা ১০০% হিউম্যানাইজ করার নিশ্চয়তা</li>
-          <li><i class="fas fa-check-circle"></i> ডেইলি লিমিট: প্রতিদিন ১৫টি Humanize</li>
-          <li><i class="fas fa-check-circle"></i> মেয়াদ: ১ মাস মেয়াদি ফুল সাপোর্ট</li>
-          <li><i class="fas fa-check-circle"></i> অ্যাসাইনমেন্ট ও থিসিসের জন্য পারফেক্ট</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20StealthWriter" target="_blank" class="order-btn">অর্ডার করুন</a>
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag pink">⚡ ১০০% হিউম্যানাইজ</span>
+          <h3>StealthWriter</h3>
+          <div class="price-tag">৩৯৯৳ / মাসিক</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> AI লেখা ১০০% হিউম্যানাইজ করার সেরা সল্যুশন</li>
+            <li><i class="fas fa-check-circle"></i> ডেইলি লিমিট: প্রতিদিন ১৫টি Humanize</li>
+            <li><i class="fas fa-check-circle"></i> মেয়াদ: ১ মাস মেয়াদি ফুল সাপোর্ট</li>
+            <li><i class="fas fa-check-circle"></i> অ্যাসাইনমেন্ট, থিসিস ও কনটেন্ট রাইটিং উপযোগী</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20StealthWriter" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
       </div>
 
-      <!-- Gemini AI Pro -->
-      <div class="card">
-        <span class="tag">হাই ডিমান্ড</span>
-        <h3>Gemini AI Pro</h3>
-        <div class="price-tag">১৮ মাসের প্রিমিয়াম অ্যাক্সেস</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> ৫ টিবি (5TB) ক্লাউড স্টোরেজ সহ</li>
-          <li><i class="fas fa-check-circle"></i> অ্যাডভান্সড এআই রিসার্চ ও প্রম্পট সাপোর্ট</li>
-          <li><i class="fas fa-check-circle"></i> ফুল মেয়াদ রিপ্লেসমেন্ট গ্যারান্টি</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Gemini%20AI%20Pro" target="_blank" class="order-btn">অর্ডার করুন</a>
-      </div>
-
-      <!-- Canva Pro -->
-      <div class="card">
-        <span class="tag">পার্সোনাল মেইল</span>
-        <h3>Canva Pro (ক্যানভা প্রো)</h3>
-        <div class="price-tag">৬ মাস / ১ বছর প্যাকেজ</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> আপনার নিজস্ব পার্সোনাল জিমেইলে অ্যাক্টিভ</li>
-          <li><i class="fas fa-check-circle"></i> আনলিমিটেড প্রিমিয়াম টেমপ্লেট ও গ্রাফিক্স</li>
-          <li><i class="fas fa-check-circle"></i> ব্র্যান্ড কিট ও ফুল রিপ্লেসমেন্ট সাপোর্ট</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Canva%20Pro" target="_blank" class="order-btn">অর্ডার করুন</a>
-      </div>
-
-      <!-- CapCut Pro -->
-      <div class="card">
-        <span class="tag">ভিডিও এডিটিং</span>
-        <h3>CapCut Pro (ক্যাপকাট প্রো)</h3>
-        <div class="price-tag">১ মাসের সাবস্ক্রিপশন</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> পিসি ও মোবাইল উভয় ডিভাইসে ব্যবহার উপযোগী</li>
-          <li><i class="fas fa-check-circle"></i> সব প্রো ইফেক্ট, ট্রানজিশন ও 4K এক্সপোর্ট</li>
-          <li><i class="fas fa-check-circle"></i> ফুল ওয়ারেন্টি সাপোর্ট</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20CapCut%20Pro" target="_blank" class="order-btn">অর্ডার করুন</a>
-      </div>
-    </div>
-
-    <!-- ভেরিফিকেশন ও সিকিউরিটি সার্ভিস -->
-    <div class="section-header">
-      <h2>ভেরিফিকেশন ও সিকিউরিটি সার্ভিস</h2>
-    </div>
-
-    <div class="grid">
       <!-- FB Verification -->
-      <div class="card">
-        <span class="tag">সোশ্যাল মিডিয়া</span>
-        <h3>FB আইডি ও পেজ ভেরিফিকেশন</h3>
-        <div class="price-tag">মেটা ব্লু টিক ভেরিফাইড সার্ভিস</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> ১০০% নিরাপদ ও লিগ্যাল মেথড</li>
-          <li><i class="fas fa-check-circle"></i> পার্সোনাল প্রোফাইল বা বিজনেস পেজ সেটআপ</li>
-          <li><i class="fas fa-check-circle"></i> ফুল সাপোর্ট ও গাইডলাইন</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20know%20about%20FB%20Verification" target="_blank" class="order-btn">যোগাযোগ করুন</a>
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">সোশ্যাল মিডিয়া</span>
+          <h3>FB আইডি ও পেজ ভেরিফিকেশন</h3>
+          <div class="price-tag">মেটা ব্লু টিক ভেরিফাইড সার্ভিস</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> ১০০% নিরাপদ ও লিগ্যাল মেথড</li>
+            <li><i class="fas fa-check-circle"></i> পার্সোনাল প্রোফাইল বা বিজনেস পেজ সেটআপ</li>
+            <li><i class="fas fa-check-circle"></i> ফুল সাপোর্ট ও কমপ্লিট গাইডলাইন</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20know%20about%20FB%20Verification" target="_blank" class="order-btn">যোগাযোগ করুন</a>
+        </div>
       </div>
 
       <!-- Verified BM -->
-      <div class="card">
-        <span class="tag">বিজ্ঞাপন ও ব্যবসা</span>
-        <h3>Verified Business Manager (BM)</h3>
-        <div class="price-tag">গ্রিন ব্যাজ ভেরিফাইড BM</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> ফেসবুক অ্যাড রান করার সেরা সল্যুশন</li>
-          <li><i class="fas fa-check-circle"></i> আনলিমিটেড ডেইলি স্পেন্ড লিমিট</li>
-          <li><i class="fas fa-check-circle"></i> ইনস্ট্যান্ট ট্রান্সফার গ্যারান্টি</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Verified%20BM" target="_blank" class="order-btn">অর্ডার করুন</a>
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">অ্যাডস ও মার্কেটিং</span>
+          <h3>Verified Business Manager (BM)</h3>
+          <div class="price-tag">গ্রিন ব্যাজ ভেরিফাইড BM</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> ফেসবুক অ্যাড রান করার চূড়ান্ত সমাধান</li>
+            <li><i class="fas fa-check-circle"></i> আনলিমিটেড ডেইলি স্পেন্ড লিমিট সুবিধা</li>
+            <li><i class="fas fa-check-circle"></i> দ্রুত ডেলিভারি ও ফুল রিপ্লেসমেন্ট গ্যারান্টি</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Verified%20BM" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
       </div>
 
       <!-- OTP & PIN -->
-      <div class="card">
-        <span class="tag">ভেরিফিকেশনের নম্বর</span>
-        <h3>ভেরিফাইড পিন ও ওটিপি নম্বর</h3>
-        <div class="price-tag">Non-VOIP / Real US & Global SIM</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> টেলিগ্রাম, হোয়াটসঅ্যাপ ও জিমেইল ভেরিফিকেশন</li>
-          <li><i class="fas fa-check-circle"></i> ব্যাংক ও পেমেন্ট গেটওয়ে সাপোর্ট</li>
-          <li><i class="fas fa-check-circle"></i> তাৎক্ষণিক ওয়ান-টাইম কোড ডেলিভারি</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20need%20OTP%20Number" target="_blank" class="order-btn">অর্ডার করুন</a>
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">ভেরিফিকেশনের নম্বর</span>
+          <h3>ভেরিফাইড পিন ও ওটিপি নম্বর</h3>
+          <div class="price-tag">Non-VOIP / Real US & Global SIM</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> টেলিগ্রাম, হোয়াটসঅ্যাপ ও জিমেইল ভেরিফিকেশন</li>
+            <li><i class="fas fa-check-circle"></i> ব্যাংক ও আন্তর্জাতিক পেমেন্ট গেটওয়ে সাপোর্ট</li>
+            <li><i class="fas fa-check-circle"></i> তাৎক্ষণিক ওয়ান-টাইম কোড ডেলিভারি</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20need%20OTP%20Number" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
       </div>
 
       <!-- VPN Services -->
-      <div class="card">
-        <span class="tag">সিকিউরিটি ও প্রাইভেসি</span>
-        <h3>হাই স্পিড প্রিমিয়াম ভিপিএন</h3>
-        <div class="price-tag">Nord / Express / Surfshark</div>
-        <ul class="features">
-          <li><i class="fas fa-check-circle"></i> হাই স্পিড ডেডিকেটেড আইপি ও সার্ভার</li>
-          <li><i class="fas fa-check-circle"></i> পিসি ও মোবাইলে নিরবচ্ছিন্ন ব্যবহার</li>
-          <li><i class="fas fa-check-circle"></i> ফুল মেয়াদ রিপ্লেসমেন্ট ওয়ারেন্টি</li>
-        </ul>
-        <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Premium%20VPN" target="_blank" class="order-btn">অর্ডার করুন</a>
+      <div class="card-wrapper">
+        <div class="card">
+          <span class="tag">সিকিউরিটি ও প্রাইভেসি</span>
+          <h3>হাই স্পিড প্রিমিয়াম ভিপিএন</h3>
+          <div class="price-tag">Nord / Express / Surfshark</div>
+          <ul class="features">
+            <li><i class="fas fa-check-circle"></i> হাই স্পিড ডেডিকেটেড আইপি ও সুপার ফাস্ট সার্ভার</li>
+            <li><i class="fas fa-check-circle"></i> পিসি ও মোবাইলে নিরবচ্ছিন্ন আনলিমিটেড ব্যবহার</li>
+            <li><i class="fas fa-check-circle"></i> ফুল মেয়াদ রিপ্লেসমেন্ট ও টেকনিক্যাল সাপোর্ট</li>
+          </ul>
+          <a href="https://wa.me/8801820232076?text=I%20want%20to%20order%20Premium%20VPN" target="_blank" class="order-btn">অর্ডার করুন</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- কাস্টমার রিভিউ স্লাইডার সেকশন -->
+    <div class="reviews-section">
+      <div class="section-header">
+        <h2>🌟 কাস্টমারদের সন্তুষ্টি ও রিভিউ</h2>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-track" id="sliderTrack">
+          <!-- Slide 1 -->
+          <div class="slide">
+            <div class="slide-placeholder">
+              <i class="fas fa-comments"></i>
+              <p>রিভিউ ইমেজ ১ (স্ক্রিনশট এখানে শো করবে)</p>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="slide">
+            <div class="slide-placeholder">
+              <i class="fas fa-thumbs-up"></i>
+              <p>রিভিউ ইমেজ ২ (স্ক্রিনশট এখানে শো করবে)</p>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="slide">
+            <div class="slide-placeholder">
+              <i class="fas fa-star"></i>
+              <p>রিভিউ ইমেজ ৩ (স্ক্রিনশট এখানে শো করবে)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-nav">
+        <button class="slider-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
 
   </div>
 
+  <!-- Footer -->
   <footer>
     <p>প্রয়োজনীয় কোনো টুলস বা সার্ভিস তালিকায় নেই? সরাসরি আমাদের জানান।</p>
     <a href="https://wa.me/8801820232076" target="_blank" class="footer-whatsapp">
@@ -557,6 +797,30 @@
     </a>
     <p style="margin-top: 15px;">&copy; Tools Market. All Rights Reserved.</p>
   </footer>
+
+  <script>
+    // Review Slider Logic
+    let currentSlide = 0;
+    const track = document.getElementById('sliderTrack');
+    const totalSlides = document.querySelectorAll('.slide').length;
+
+    function updateSlider() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateSlider();
+    }
+
+    // Auto-slide every 4 seconds
+    setInterval(nextSlide, 4000);
+  </script>
 
 </body>
 </html>

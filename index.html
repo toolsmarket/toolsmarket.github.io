@@ -7,12 +7,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg-color: #070a13;
-      --card-bg: rgba(15, 23, 42, 0.75);
-      --primary-cyan: #00f2fe;
-      --primary-blue: #4facfe;
-      --primary-purple: #9333ea;
-      --accent-pink: #f43f5e;
+      --bg-color: #05070f;
+      --card-bg: rgba(10, 15, 30, 0.82);
+      
+      /* Matching Logo Palette */
+      --logo-cyan: #00d2ff;
+      --logo-blue: #0072ff;
+      --logo-purple: #9b51e0;
+      --logo-magenta: #c471ed;
+      --logo-gradient: linear-gradient(135deg, #00d2ff 0%, #0072ff 45%, #9b51e0 80%, #c471ed 100%);
+      --btn-gradient: linear-gradient(135deg, #00d2ff 0%, #0072ff 50%, #9b51e0 100%);
+      
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --whatsapp-green: #25d366;
@@ -35,7 +40,7 @@
       padding-bottom: 50px;
     }
 
-    /* Background Ambient Glow */
+    /* Ambient Circuit & Glow matching the logo */
     .ambient-bg {
       position: fixed;
       top: 0;
@@ -44,18 +49,21 @@
       height: 100vh;
       pointer-events: none;
       z-index: -1;
-      background: radial-gradient(circle at 20% 15%, rgba(79, 172, 254, 0.12), transparent 40%),
-                  radial-gradient(circle at 80% 60%, rgba(147, 51, 234, 0.12), transparent 40%),
-                  radial-gradient(circle at 50% 90%, rgba(0, 242, 254, 0.08), transparent 40%);
+      background: radial-gradient(circle at 15% 15%, rgba(0, 210, 255, 0.15), transparent 45%),
+                  radial-gradient(circle at 85% 55%, rgba(196, 113, 237, 0.14), transparent 45%),
+                  radial-gradient(circle at 50% 85%, rgba(0, 114, 255, 0.10), transparent 50%);
     }
 
-    /* Keyframe Animations */
-    @keyframes glowPulse {
-      0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.4)); }
-      50% { filter: drop-shadow(0 0 30px rgba(147, 51, 234, 0.7)); }
+    @keyframes logoPulse {
+      0%, 100% {
+        box-shadow: 0 0 25px rgba(0, 210, 255, 0.4), 0 0 45px rgba(155, 81, 224, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(0, 210, 255, 0.65), 0 0 65px rgba(196, 113, 237, 0.55);
+      }
     }
 
-    @keyframes textGradient {
+    @keyframes textFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
@@ -64,7 +72,7 @@
     @keyframes cardFadeUp {
       from {
         opacity: 0;
-        transform: translateY(35px) scale(0.97);
+        transform: translateY(30px) scale(0.98);
       }
       to {
         opacity: 1;
@@ -75,21 +83,20 @@
     /* Header Section */
     header {
       text-align: center;
-      padding: 50px 20px 30px;
+      padding: 45px 20px 25px;
     }
 
     .logo-container {
-      width: 105px;
-      height: 105px;
+      width: 110px;
+      height: 110px;
       margin: 0 auto 20px;
       border-radius: 50%;
-      background: radial-gradient(circle, #1e1b4b 0%, #070a13 100%);
-      border: 2px solid rgba(0, 242, 254, 0.7);
+      background: #000;
+      border: 2px solid rgba(0, 210, 255, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 30px rgba(0, 242, 254, 0.45);
-      animation: glowPulse 4s infinite ease-in-out;
+      animation: logoPulse 4s infinite ease-in-out;
       overflow: hidden;
     }
 
@@ -100,46 +107,54 @@
     }
 
     .logo-fallback {
-      font-weight: 800;
-      font-size: 1.8rem;
-      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+      font-weight: 900;
+      font-size: 2rem;
+      background: var(--logo-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-    }
-
-    .brand-badge {
-      display: inline-block;
-      padding: 6px 18px;
-      border-radius: 30px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      background: rgba(79, 172, 254, 0.12);
-      border: 1px solid rgba(0, 242, 254, 0.4);
-      color: var(--primary-cyan);
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
-      margin-bottom: 12px;
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 900;
       letter-spacing: -0.5px;
-      background: linear-gradient(90deg, #ffffff, #00f2fe, #9333ea, #ffffff);
+      background: var(--logo-gradient);
       background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: textGradient 6s ease infinite;
-      margin-bottom: 10px;
+      animation: textFlow 6s ease infinite;
+      margin-bottom: 15px;
     }
 
-    header p {
-      color: var(--text-muted);
-      max-width: 620px;
-      margin: 0 auto 22px;
-      font-size: 1rem;
-      line-height: 1.6;
+    /* Highlighted Tagline Container */
+    .tagline-box {
+      max-width: 680px;
+      margin: 0 auto 25px;
+      padding: 16px 24px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0, 210, 255, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .tagline-box .main-highlight {
+      font-size: 1.15rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00d2ff, #c471ed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .tagline-box .sub-highlight {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: block;
+      letter-spacing: 0.2px;
     }
 
     .whatsapp-btn-top {
@@ -148,11 +163,11 @@
       gap: 10px;
       background: linear-gradient(135deg, #25d366, #128c7e);
       color: #fff;
-      padding: 13px 32px;
+      padding: 13px 34px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       box-shadow: 0 4px 25px rgba(37, 211, 102, 0.45);
       transition: all 0.3s ease;
     }
@@ -168,7 +183,7 @@
       padding: 0 20px;
     }
 
-    /* Section Heading Styles */
+    /* Section Headings */
     .section-header {
       text-align: center;
       margin: 55px 0 30px;
@@ -176,15 +191,15 @@
 
     .section-header h2 {
       display: inline-block;
-      font-size: 1.65rem;
+      font-size: 1.7rem;
       font-weight: 800;
-      background: linear-gradient(90deg, #38bdf8, #c084fc, #38bdf8);
+      background: linear-gradient(90deg, #00d2ff, #9b51e0, #c471ed);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: textGradient 5s linear infinite;
+      animation: textFlow 5s linear infinite;
       position: relative;
-      padding-bottom: 10px;
+      padding-bottom: 12px;
     }
 
     .section-header h2::after {
@@ -193,10 +208,10 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 65%;
+      width: 70%;
       height: 3px;
-      background: linear-gradient(90deg, transparent, #38bdf8, #c084fc, transparent);
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+      background: linear-gradient(90deg, transparent, #00d2ff, #9b51e0, transparent);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.9);
       border-radius: 3px;
     }
 
@@ -208,24 +223,24 @@
       margin-bottom: 25px;
     }
 
-    /* Modern Neon Border Card Styles */
+    /* Neon Gradient Glow Cards */
     .card-wrapper {
       position: relative;
       border-radius: 20px;
-      padding: 1.5px;
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.4), rgba(147, 51, 234, 0.2), rgba(255, 255, 255, 0.05));
+      padding: 1.8px;
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.5), rgba(155, 81, 224, 0.35), rgba(255, 255, 255, 0.05));
       animation: cardFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
       transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
     }
 
     .card-wrapper:hover {
       transform: translateY(-8px);
-      background: linear-gradient(135deg, #00f2fe, #9333ea, #f43f5e);
-      box-shadow: 0 10px 35px rgba(0, 242, 254, 0.35), 0 0 20px rgba(147, 51, 234, 0.3);
+      background: var(--logo-gradient);
+      box-shadow: 0 12px 35px rgba(0, 210, 255, 0.4), 0 0 25px rgba(155, 81, 224, 0.35);
     }
 
     .card-wrapper.gold-border {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.7), rgba(251, 191, 36, 0.3), rgba(217, 119, 6, 0.1));
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.8), rgba(251, 191, 36, 0.3), rgba(217, 119, 6, 0.1));
     }
 
     .card-wrapper.gold-border:hover {
@@ -235,7 +250,7 @@
 
     .card {
       background: var(--card-bg);
-      border-radius: 19px;
+      border-radius: 18.5px;
       padding: 24px;
       height: 100%;
       display: flex;
@@ -246,15 +261,15 @@
 
     .tag {
       align-self: flex-start;
-      background: rgba(79, 172, 254, 0.12);
-      color: var(--primary-cyan);
+      background: rgba(0, 210, 255, 0.12);
+      color: var(--logo-cyan);
       font-size: 0.78rem;
       font-weight: 700;
       padding: 5px 14px;
       border-radius: 20px;
       margin-bottom: 14px;
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.2);
     }
 
     .tag.gold {
@@ -264,11 +279,11 @@
       box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
     }
 
-    .tag.pink {
-      background: rgba(244, 63, 94, 0.15);
-      color: var(--accent-pink);
-      border-color: rgba(244, 63, 94, 0.4);
-      box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+    .tag.purple {
+      background: rgba(196, 113, 237, 0.15);
+      color: var(--logo-magenta);
+      border-color: rgba(196, 113, 237, 0.4);
+      box-shadow: 0 0 10px rgba(196, 113, 237, 0.2);
     }
 
     .card h3 {
@@ -281,9 +296,9 @@
     .price-tag {
       font-size: 1.2rem;
       font-weight: 800;
-      color: #38bdf8;
+      color: var(--logo-cyan);
       margin-bottom: 16px;
-      text-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+      text-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
     }
 
     .price-tag.gold {
@@ -292,8 +307,8 @@
     }
 
     .validity-list {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px dashed rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px dashed rgba(0, 210, 255, 0.2);
       border-radius: 10px;
       padding: 10px 14px;
       margin-bottom: 16px;
@@ -314,7 +329,7 @@
 
     .validity-list span.val-price {
       font-weight: 700;
-      color: #38bdf8;
+      color: var(--logo-cyan);
     }
 
     .validity-list.gold-list span.val-price {
@@ -337,10 +352,10 @@
     }
 
     .features li i {
-      color: #00f2fe;
+      color: var(--logo-cyan);
       font-size: 0.85rem;
       margin-top: 4px;
-      filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.6));
+      filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.7));
     }
 
     .features li i.gold-icon {
@@ -352,19 +367,19 @@
       display: block;
       width: 100%;
       text-align: center;
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      color: #030712;
+      background: var(--btn-gradient);
+      color: #fff;
       padding: 13px;
       border-radius: 12px;
       text-decoration: none;
       font-weight: 800;
       font-size: 0.95rem;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.35);
+      box-shadow: 0 4px 18px rgba(0, 210, 255, 0.35);
     }
 
     .order-btn:hover {
-      box-shadow: 0 6px 25px rgba(0, 242, 254, 0.65);
+      box-shadow: 0 6px 28px rgba(155, 81, 224, 0.65);
       transform: translateY(-2px);
     }
 
@@ -378,7 +393,7 @@
       box-shadow: 0 6px 28px rgba(245, 158, 11, 0.7);
     }
 
-    /* Customer Reviews Slider Section */
+    /* Customer Reviews Slider */
     .reviews-section {
       margin-top: 65px;
       text-align: center;
@@ -391,22 +406,21 @@
       overflow: hidden;
       border-radius: 20px;
       padding: 2px;
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.4), rgba(147, 51, 234, 0.4));
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      background: var(--logo-gradient);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
     }
 
     .slider-track {
       display: flex;
       transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
       border-radius: 18px;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(10, 15, 30, 0.95);
     }
 
     .slide {
       min-width: 100%;
-      padding: 25px;
+      padding: 20px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
@@ -414,30 +428,10 @@
 
     .slide img {
       max-width: 100%;
-      max-height: 380px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      object-fit: contain;
-    }
-
-    .slide-placeholder {
-      width: 100%;
-      height: 260px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 2px dashed rgba(255, 255, 255, 0.15);
+      max-height: 440px;
       border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      padding: 20px;
-    }
-
-    .slide-placeholder i {
-      font-size: 2.5rem;
-      margin-bottom: 12px;
-      color: var(--primary-cyan);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+      object-fit: contain;
     }
 
     .slider-nav {
@@ -450,10 +444,10 @@
 
     .slider-btn {
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(0, 210, 255, 0.3);
       color: #fff;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
@@ -463,9 +457,9 @@
     }
 
     .slider-btn:hover {
-      background: var(--primary-cyan);
+      background: var(--logo-cyan);
       color: #000;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
     }
 
     footer {
@@ -483,7 +477,7 @@
       gap: 8px;
       background: rgba(37, 211, 102, 0.12);
       color: var(--whatsapp-green);
-      padding: 9px 22px;
+      padding: 9px 24px;
       border-radius: 25px;
       text-decoration: none;
       font-weight: 700;
@@ -503,9 +497,15 @@
       <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
       <div class="logo-fallback" style="display:none;">TM</div>
     </div>
-    <div class="brand-badge"><i class="fas fa-bolt"></i> ১০০০% ট্রাস্টেড ও অফিসিয়াল সার্ভিস</div>
+    
     <h1>Tools Market</h1>
-    <p>প্রিমিয়াম ডিজিটাল টুলস ও ভেরিফাইড সার্ভিস মার্কেটপ্লেস। আপনার বিশ্বাস ও নির্ভরযোগ্যতাই আমাদের মূল লক্ষ্য।</p>
+
+    <!-- হাইলাইটেড ব্যানার টেক্সট -->
+    <div class="tagline-box">
+      <span class="main-highlight">”প্রিমিয়াম ডিজিটাল টুলস ও ভেরিফাইড সার্ভিস মার্কেটপ্লেস”</span>
+      <span class="sub-highlight">আপনার বিশ্বাস ও নির্ভরযোগ্যতাই আমাদের মূল লক্ষ্য</span>
+    </div>
+
     <a href="https://wa.me/8801820232076?text=Hello,%20I%20want%20to%20know%20about%20your%20services" target="_blank" class="whatsapp-btn-top">
       <i class="fab fa-whatsapp" style="font-size: 1.25rem;"></i> সরাসরি হোয়াটসঅ্যাপে কথা বলুন
     </a>
@@ -513,7 +513,7 @@
 
   <div class="container">
 
-    <!-- সেকশন ১: মোস্ট পপুলার ৩টি টুলস (Gemini 18 মাস, CapCut, Canva) -->
+    <!-- সেকশন ১: মোস্ট পপুলার ৩টি টুলস -->
     <div class="section-header">
       <h2>🔥 মোস্ট পপুলার প্রিমিয়াম টুলস</h2>
     </div>
@@ -554,7 +554,7 @@
       <!-- 3. Canva Pro -->
       <div class="card-wrapper">
         <div class="card">
-          <span class="tag">🎨 পার্সোনাল মেইল অ্যাক্টিভ</span>
+          <span class="tag purple">🎨 পার্সোনাল মেইল অ্যাক্টিভ</span>
           <h3>Canva Pro (ক্যানভা প্রো)</h3>
           <div class="price-tag">৬ মাস / ১ বছর প্যাকেজ</div>
           <ul class="features">
@@ -640,7 +640,7 @@
       <!-- PLATINUM PACKAGE -->
       <div class="card-wrapper">
         <div class="card">
-          <span class="tag">🚀 আল্টিমেট কম্বো</span>
+          <span class="tag purple">🚀 আল্টিমেট কম্বো</span>
           <h3>PLATINUM PACKAGE</h3>
           <div class="price-tag">৭৯৯৳ / মাসিক</div>
           <div class="validity-list">
@@ -674,7 +674,7 @@
       <!-- StealthWriter -->
       <div class="card-wrapper">
         <div class="card">
-          <span class="tag pink">⚡ ১০০% হিউম্যানাইজ</span>
+          <span class="tag">⚡ ১০০% হিউম্যানাইজ</span>
           <h3>StealthWriter</h3>
           <div class="price-tag">৩৯৯৳ / মাসিক</div>
           <ul class="features">
@@ -690,7 +690,7 @@
       <!-- FB Verification -->
       <div class="card-wrapper">
         <div class="card">
-          <span class="tag">সোশ্যাল মিডিয়া</span>
+          <span class="tag purple">সোশ্যাল মিডিয়া</span>
           <h3>FB আইডি ও পেজ ভেরিফিকেশন</h3>
           <div class="price-tag">মেটা ব্লু টিক ভেরিফাইড সার্ভিস</div>
           <ul class="features">
@@ -720,7 +720,7 @@
       <!-- OTP & PIN -->
       <div class="card-wrapper">
         <div class="card">
-          <span class="tag">ভেরিফিকেশনের নম্বর</span>
+          <span class="tag purple">ভেরিফিকেশনের নম্বর</span>
           <h3>ভেরিফাইড পিন ও ওটিপি নম্বর</h3>
           <div class="price-tag">Non-VOIP / Real US & Global SIM</div>
           <ul class="features">
@@ -757,26 +757,17 @@
 
       <div class="slider-container">
         <div class="slider-track" id="sliderTrack">
-          <!-- Slide 1 -->
           <div class="slide">
-            <div class="slide-placeholder">
-              <i class="fas fa-comments"></i>
-              <p>রিভিউ ইমেজ ১ (স্ক্রিনশট এখানে শো করবে)</p>
-            </div>
+            <img src="review1.jpg" alt="Review 1">
           </div>
-          <!-- Slide 2 -->
           <div class="slide">
-            <div class="slide-placeholder">
-              <i class="fas fa-thumbs-up"></i>
-              <p>রিভিউ ইমেজ ২ (স্ক্রিনশট এখানে শো করবে)</p>
-            </div>
+            <img src="review2.jpg" alt="Review 2">
           </div>
-          <!-- Slide 3 -->
           <div class="slide">
-            <div class="slide-placeholder">
-              <i class="fas fa-star"></i>
-              <p>রিভিউ ইমেজ ৩ (স্ক্রিনশট এখানে শো করবে)</p>
-            </div>
+            <img src="review3.jpg" alt="Review 3">
+          </div>
+          <div class="slide">
+            <img src="review4.jpg" alt="Review 4">
           </div>
         </div>
       </div>
@@ -799,7 +790,6 @@
   </footer>
 
   <script>
-    // Review Slider Logic
     let currentSlide = 0;
     const track = document.getElementById('sliderTrack');
     const totalSlides = document.querySelectorAll('.slide').length;
@@ -818,8 +808,7 @@
       updateSlider();
     }
 
-    // Auto-slide every 4 seconds
-    setInterval(nextSlide, 4000);
+    setInterval(nextSlide, 3500);
   </script>
 
 </body>

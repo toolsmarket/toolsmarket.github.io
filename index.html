@@ -294,7 +294,7 @@
       margin-bottom: 25px;
     }
 
-    /* Rotating Neon Border Cards */
+    /* Cards */
     .card-wrapper {
       position: relative;
       border-radius: 20px;
@@ -423,6 +423,104 @@
     .order-btn.gold-btn {
       background: var(--gold-gradient);
       color: #000;
+    }
+
+    /* Video Portfolio Showcase Section */
+    .video-showcase-container {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 20px;
+      padding: 30px 24px;
+      margin: 40px auto 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .video-card {
+      background: rgba(6, 11, 24, 0.9);
+      border: 1px solid rgba(155, 81, 224, 0.35);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--logo-cyan);
+      box-shadow: 0 8px 25px rgba(0, 210, 255, 0.25);
+    }
+
+    .video-thumbnail-box {
+      width: 100%;
+      height: 140px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.15), rgba(155, 81, 224, 0.25));
+      border: 1px dashed rgba(0, 210, 255, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .video-thumbnail-box i {
+      font-size: 2.5rem;
+      color: #ff3366;
+      filter: drop-shadow(0 0 12px rgba(255, 51, 102, 0.7));
+      transition: transform 0.2s ease;
+    }
+
+    .video-card:hover .video-thumbnail-box i {
+      transform: scale(1.15);
+    }
+
+    .video-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 6px;
+    }
+
+    .video-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .video-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: rgba(24, 119, 242, 0.15);
+      border: 1px solid rgba(24, 119, 242, 0.4);
+      color: #38bdf8;
+      padding: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
+    }
+
+    .video-link-btn:hover {
+      background: #1877f2;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
     }
 
     /* Customer Reviews Slider */
@@ -682,6 +780,7 @@
       <button class="filter-btn" onclick="filterItems('popular')">🔥 পপুলার টুলস</button>
       <button class="filter-btn" onclick="filterItems('combo')">💎 কম্বো প্যাকেজ</button>
       <button class="filter-btn" onclick="filterItems('service')">🛡️ স্পেশাল সার্ভিস</button>
+      <button class="filter-btn" onclick="filterItems('video')">🎬 প্রমোশনাল ভিডিও</button>
     </div>
 
     <!-- সেকশন ১: মোস্ট পপুলার ৩টি টুলস -->
@@ -828,17 +927,33 @@
     </div>
 
 
-    <!-- সেকশন ৩: বিশেষ সিঙ্গেল ও সিকিউরিটি সার্ভিস (নতুন ফলোয়ার সার্ভিস সহ) -->
+    <!-- সেকশন ৩: বিশেষ সিঙ্গেল ও সিকিউরিটি সার্ভিস -->
     <div class="category-block cat-service">
       <div class="section-header" data-aos="fade-up">
         <h2>🛡️ স্পেশাল সিঙ্গেল AI ও সিকিউরিটি সার্ভিস</h2>
       </div>
 
       <div class="grid">
-        <!-- New Service: Follower Service -->
+        <!-- New Service: Professional Business Page Setup -->
         <div class="card-wrapper" data-aos="fade-up" data-aos-delay="100">
           <div class="card">
-            <span class="tag purple">🚀 সোশ্যাল গ্রোথ</span>
+            <span class="tag purple">💼 বিজনেস সল্যুশন</span>
+            <h3>প্রফেশনাল বিজনেস পেজ সেটআপ</h3>
+            <div class="price-tag">A to Z ফুল পেজ অপটিমাইজেশন</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> এসইও ফ্রেন্ডলি পেজ নেম ও ইউজারনেম সেটআপ</li>
+              <li><i class="fas fa-check-circle"></i> প্রফেশনাল লোগো ও কভার ফটো ডিজাইন ইন্টিগ্রেশন</li>
+              <li><i class="fas fa-check-circle"></i> অটোমেটেড মেসেঞ্জার ও হোয়াটসঅ্যাপ চ্যাটবট সেটআপ</li>
+              <li><i class="fas fa-check-circle"></i> কল-টু-অ্যাকশন বাটন, সার্ভিস লিস্ট ও শপ সেটআপ</li>
+            </ul>
+            <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20প্রফেশনাল%20বিজনেস%20পেজ%20সেটআপ%20সার্ভিসটি%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- Follower Service -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="200">
+          <div class="card">
+            <span class="tag">🚀 সোশ্যাল গ্রোথ</span>
             <h3>সোশ্যাল মিডিয়া ফলোয়ার সার্ভিস</h3>
             <div class="price-tag">ফেসবুক ও ইনস্টাগ্রাম ফলোয়ার</div>
             <ul class="features">
@@ -852,7 +967,7 @@
         </div>
 
         <!-- StealthWriter -->
-        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="300">
           <div class="card">
             <span class="tag">⚡ ১০০% হিউম্যানাইজ</span>
             <h3>StealthWriter</h3>
@@ -868,7 +983,7 @@
         </div>
 
         <!-- FB Verification -->
-        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="300">
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="400">
           <div class="card">
             <span class="tag purple">সোশ্যাল মিডিয়া</span>
             <h3>FB আইডি ও পেজ ভেরিফিকেশন</h3>
@@ -883,7 +998,7 @@
         </div>
 
         <!-- Verified BM -->
-        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="400">
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="500">
           <div class="card">
             <span class="tag">অ্যাডস ও মার্কেটিং</span>
             <h3>Verified Business Manager (BM)</h3>
@@ -898,7 +1013,7 @@
         </div>
 
         <!-- OTP & PIN -->
-        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="500">
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="600">
           <div class="card">
             <span class="tag purple">ভেরিফিকেশনের নম্বর</span>
             <h3>ভেরিফাইড পিন ও ওটিপি নম্বর</h3>
@@ -913,7 +1028,7 @@
         </div>
 
         <!-- VPN Services -->
-        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="600">
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="700">
           <div class="card">
             <span class="tag">সিকিউরিটি ও প্রাইভেসি</span>
             <h3>হাই স্পিড প্রিমিয়াম ভিপিএন</h3>
@@ -925,6 +1040,93 @@
             </ul>
             <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20Premium%20VPN%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
           </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- সেকশন ৪: প্রমোশনাল ভিডিও কনটেন্ট সার্ভিস (Portfolio Showcase) -->
+    <div class="category-block cat-video">
+      <div class="section-header" data-aos="fade-up">
+        <h2>🎬 প্রমোশনাল কন্টেন্ট সার্ভিস (আমাদের সফল কাজসমূহ)</h2>
+      </div>
+
+      <div class="video-showcase-container" data-aos="fade-up">
+        <p style="text-align: center; color: var(--text-muted); max-width: 650px; margin: 0 auto 10px; font-size: 0.98rem;">
+          আপনার ব্যবসা, পেজ বা প্রোডাক্টের জন্য আকর্ষণীয় প্রমোশনাল ভিডিও বানিয়ে নিন প্রফেশনাল এডিটর দিয়ে। নিচে আমাদের করা কিছু সাম্প্রতিক কাজের নমুনা দেখুন:
+        </p>
+
+        <div class="video-grid">
+          <!-- Video 1 -->
+          <div class="video-card">
+            <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/1DhimH7tZH/', '_blank')">
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.85rem; margin-top: 6px; font-weight: 600;">ভিডিও ডেমো ১</span>
+            </div>
+            <h4>প্রমোশনাল ভিডিও কনটেন্ট #১</h4>
+            <p>ডিজিটাল প্রোডাক্ট ও সোশ্যাল মিডিয়া বিজ্ঞাপন অ্যাড ফরম্যাট।</p>
+            <a href="https://www.facebook.com/share/r/1DhimH7tZH/" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল দেখুন ↗
+            </a>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="video-card">
+            <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/1JvMFHMbJQ/', '_blank')">
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.85rem; margin-top: 6px; font-weight: 600;">ভিডিও ডেমো ২</span>
+            </div>
+            <h4>প্রমোশনাল ভিডিও কনটেন্ট #২</h4>
+            <p>হাই-কনভার্টিং ভাইরাল রিলস ও সোশ্যাল মিডিয়া মার্কেটিং অ্যাড।</p>
+            <a href="https://www.facebook.com/share/r/1JvMFHMbJQ/" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল দেখুন ↗
+            </a>
+          </div>
+
+          <!-- Video 3 -->
+          <div class="video-card">
+            <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/1CKR7R8boB/', '_blank')">
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.85rem; margin-top: 6px; font-weight: 600;">ভিডিও ডেমো ৩</span>
+            </div>
+            <h4>প্রমোশনাল ভিডিও কনটেন্ট #৩</h4>
+            <p>আধুনিক ট্রানজিশন ও ভিজ্যুয়াল ইফেক্ট সহ আকর্ষণীয় প্রমোশন।</p>
+            <a href="https://www.facebook.com/share/r/1CKR7R8boB/" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল দেখুন ↗
+            </a>
+          </div>
+
+          <!-- Video 4 -->
+          <div class="video-card">
+            <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/19qc5DamWW/', '_blank')">
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.85rem; margin-top: 6px; font-weight: 600;">ভিডিও ডেমো ৪</span>
+            </div>
+            <h4>প্রমোশনাল ভিডিও কনটেন্ট #৪</h4>
+            <p>সার্ভিস রিভিউ, টেক্সট অ্যানিমেশন ও ভয়েসওভার পেয়ারিং।</p>
+            <a href="https://www.facebook.com/share/r/19qc5DamWW/" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল দেখুন ↗
+            </a>
+          </div>
+
+          <!-- Video 5 -->
+          <div class="video-card">
+            <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/1G2hGrPAXg/', '_blank')">
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.85rem; margin-top: 6px; font-weight: 600;">ভিডিও ডেমো ৫</span>
+            </div>
+            <h4>প্রমোশনাল ভিডিও কনটেন্ট #৫</h4>
+            <p>প্রিমিয়াম ব্র্যান্ডিং ও প্রোডাক্ট লঞ্চিং স্পেশাল প্রমো ভিডিও।</p>
+            <a href="https://www.facebook.com/share/r/1G2hGrPAXg/" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল দেখুন ↗
+            </a>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+          <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20আমার%20ব্যবসার%20জন্য%20প্রমোশনাল%20ভিডিও%20বানাতে%20চাই।" target="_blank" class="order-btn" style="display: inline-block; width: auto; padding: 13px 38px;">
+            <i class="fas fa-video"></i> আপনার প্রমোশনাল ভিডিও অর্ডার করতে কথা বলুন
+          </a>
         </div>
       </div>
     </div>
@@ -1064,23 +1266,33 @@
       const popular = document.querySelector('.cat-popular');
       const combo = document.querySelector('.cat-combo');
       const service = document.querySelector('.cat-service');
+      const video = document.querySelector('.cat-video');
 
       if (category === 'all') {
         popular.style.display = 'block';
         combo.style.display = 'block';
         service.style.display = 'block';
+        video.style.display = 'block';
       } else if (category === 'popular') {
         popular.style.display = 'block';
         combo.style.display = 'none';
         service.style.display = 'none';
+        video.style.display = 'none';
       } else if (category === 'combo') {
         popular.style.display = 'none';
         combo.style.display = 'block';
         service.style.display = 'none';
+        video.style.display = 'none';
       } else if (category === 'service') {
         popular.style.display = 'none';
         combo.style.display = 'none';
         service.style.display = 'block';
+        video.style.display = 'none';
+      } else if (category === 'video') {
+        popular.style.display = 'none';
+        combo.style.display = 'none';
+        service.style.display = 'none';
+        video.style.display = 'block';
       }
     }
   </script>

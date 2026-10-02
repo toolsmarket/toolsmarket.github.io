@@ -66,12 +66,6 @@
                   radial-gradient(circle at 50% 90%, rgba(0, 114, 255, 0.12), transparent 50%);
     }
 
-    /* Keyframe Animations */
-    @keyframes logoPulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(0, 210, 255, 0.45), 0 0 40px rgba(155, 81, 224, 0.35); }
-      50% { box-shadow: 0 0 35px rgba(0, 210, 255, 0.75), 0 0 65px rgba(196, 113, 237, 0.6); }
-    }
-
     @keyframes textFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -81,6 +75,17 @@
     @keyframes floatWa {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
+    }
+
+    @keyframes newCardSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     /* Sticky Navbar */
@@ -158,7 +163,6 @@
       transform: scale(1.04);
     }
 
-    /* Mobile Hamburger */
     .menu-toggle {
       display: none;
       background: none;
@@ -676,13 +680,13 @@
 
     /* Live Interactive Review System */
     .review-system-box {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(0, 210, 255, 0.25);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(0, 210, 255, 0.3);
       border-radius: 20px;
-      padding: 30px 20px;
+      padding: 30px 22px;
       margin: 45px auto 20px;
       max-width: 850px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
     }
 
     .star-select {
@@ -690,13 +694,17 @@
       justify-content: center;
       gap: 8px;
       margin: 12px 0 18px;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       cursor: pointer;
     }
 
     .star-select i {
       color: #475569;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .star-select i:hover {
+      transform: scale(1.15);
     }
 
     .star-select i.active {
@@ -721,43 +729,58 @@
       border-color: var(--logo-cyan);
     }
 
+    .review-success-msg {
+      display: none;
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      color: #25d366;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 0.92rem;
+    }
+
     .review-cards-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
       margin-top: 30px;
       text-align: left;
     }
 
     .user-review-card {
-      background: rgba(6, 11, 24, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(6, 11, 24, 0.9);
+      border: 1px solid rgba(0, 210, 255, 0.15);
       border-radius: 14px;
-      padding: 16px;
+      padding: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: newCardSlide 0.5s ease-out;
     }
 
     .user-review-card .rev-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .user-review-card .user-name {
       font-weight: 700;
       color: #f8fafc;
-      font-size: 0.98rem;
+      font-size: 1rem;
     }
 
     .user-review-card .stars {
       color: #f59e0b;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
     }
 
     .user-review-card .rev-text {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.4;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.5;
     }
 
     /* FAQ Section */
@@ -812,10 +835,10 @@
       color: var(--logo-cyan);
     }
 
-    /* Payment Badges */
+    /* Interactive Payment Badges & Details */
     .payment-section {
       text-align: center;
-      margin: 45px 0 20px;
+      margin: 50px 0 20px;
     }
 
     .payment-badges {
@@ -826,17 +849,115 @@
       margin-top: 15px;
     }
 
-    .pay-badge {
+    .pay-btn-badge {
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 6px 18px;
-      border-radius: 25px;
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      padding: 10px 22px;
+      border-radius: 30px;
       font-weight: 700;
-      font-size: 0.9rem;
-      color: #e2e8f0;
+      font-size: 0.95rem;
+      color: #f8fafc;
       display: inline-flex;
       align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .pay-btn-badge:hover, .pay-btn-badge.active {
+      background: rgba(0, 210, 255, 0.15);
+      border-color: var(--logo-cyan);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 18px rgba(0, 210, 255, 0.3);
+    }
+
+    /* Payment Summary Box (Interactive Dropdown Card) */
+    .payment-details-card {
+      display: none;
+      max-width: 650px;
+      margin: 25px auto 0;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1.5px solid var(--logo-cyan);
+      border-radius: 18px;
+      padding: 24px;
+      text-align: left;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 210, 255, 0.1);
+      animation: newCardSlide 0.4s ease-out;
+    }
+
+    .pay-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+    }
+
+    .pay-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pay-number-box {
+      background: rgba(4, 7, 17, 0.85);
+      border: 1px dashed rgba(0, 210, 255, 0.4);
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .pay-number-text {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--logo-cyan);
+      letter-spacing: 1px;
+    }
+
+    .copy-btn {
+      background: var(--btn-gradient);
+      color: #fff;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.5);
+    }
+
+    .pay-steps {
+      list-style: none;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+    }
+
+    .pay-steps li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
       gap: 8px;
+    }
+
+    .pay-steps li i {
+      color: var(--logo-cyan);
+      font-size: 0.85rem;
     }
 
     /* Floating WhatsApp Button */
@@ -922,7 +1043,7 @@
       <li><a href="#popular">টুলস</a></li>
       <li><a href="#combo">কম্বো প্যাকেজ</a></li>
       <li><a href="#services">সার্ভিসেস</a></li>
-      <li><a href="#video">ভিডিও পোর্টফোলিও</a></li>
+      <li><a href="#video">প্রমোশনাল ভিডিও সার্ভিস</a></li>
       <li><a href="#reviews">রিভিউ</a></li>
     </ul>
 
@@ -991,7 +1112,7 @@
       <button class="filter-btn" onclick="filterItems('popular')">🔥 পপুলার টুলস</button>
       <button class="filter-btn" onclick="filterItems('combo')">💎 কম্বো প্যাকেজ</button>
       <button class="filter-btn" onclick="filterItems('service')">🛡️ স্পেশাল সার্ভিস</button>
-      <button class="filter-btn" onclick="filterItems('video')">🎬 প্রমোশনাল ভিডিও</button>
+      <button class="filter-btn" onclick="filterItems('video')">🎬 প্রমোশনাল ভিডিও সার্ভিস</button>
     </div>
 
     <!-- সেকশন ১: মোস্ট পপুলার ৩টি টুলস -->
@@ -1128,7 +1249,6 @@
               <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস ও কুইলবট প্রিমিয়াম</li>
               <li><i class="fas fa-check-circle"></i> গ্রামারলি ও পারপ্লেক্সিটি প্রো (ডীপ রিসার্চ)</li>
               <li><i class="fas fa-check-circle"></i> পেপারপাল প্রাইম ও জেনি এ আই</li>
-              <li><i class="fas fa-check-circle"></i> গ্রোক সুপার, স্কিল শেয়ার ও ক্যানভা</li>
               <li><i class="fas fa-gift"></i> সাথে আরো স্পেশাল বোনাস টুলস!</li>
             </ul>
             <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20PLATINUM%20PACKAGE%20(৭৯৯৳)%20অর্ডার%20করতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
@@ -1223,23 +1343,8 @@
           </div>
         </div>
 
-        <!-- OTP & PIN -->
-        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="600">
-          <div class="card">
-            <span class="tag purple">ভেরিফিকেশনের নম্বর</span>
-            <h3>ভেরিফাইড পিন ও ওটিপি নম্বর</h3>
-            <div class="price-tag">Non-VOIP / Real US & Global SIM</div>
-            <ul class="features">
-              <li><i class="fas fa-check-circle"></i> টেলিগ্রাম, হোয়াটসঅ্যাপ ও জিমেইল ভেরিফিকেশন</li>
-              <li><i class="fas fa-check-circle"></i> ব্যাংক ও আন্তর্জাতিক পেমেন্ট গেটওয়ে সাপোর্ট</li>
-              <li><i class="fas fa-check-circle"></i> তাৎক্ষণিক ওয়ান-টাইম কোড ডেলিভারি</li>
-            </ul>
-            <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমার%20Tools%20Market%20থেকে%20OTP%20বা%20ভেরিফিকেশন%20নম্বর%20প্রয়োজন।" target="_blank" class="order-btn">অর্ডার করুন</a>
-          </div>
-        </div>
-
         <!-- VPN Services -->
-        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="700">
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="600">
           <div class="card">
             <span class="tag">সিকিউরিটি ও প্রাইভেসি</span>
             <h3>হাই স্পিড প্রিমিয়াম ভিপিএন</h3>
@@ -1374,6 +1479,1543 @@
         Tools Market থেকে সার্ভিস নিয়ে আপনার কেমন লেগেছে তা শেয়ার করুন:
       </p>
 
+      <div class="review-success-msg" id="reviewSuccessMsg">
+        🎉 ধন্যবাদ! আপনার মূল্যবান রিভিউটি সফলভাবে প্রকাশিত হয়েছে।
+      </div>
+
+      <div class="star-select" id="starContainer">
+        <i class="fas fa-star active" onclick="setRating(1)"></i>
+        <i class="fas fa-star active" onclick="setRating(2)"></i>
+        <i class="fas fa-star active" onclick="setRating(3)"></i>
+        <i class="fas faআপনার চাহিদা অনুযায়ী পেমেন্ট মেথড সেকশনে একটি আকর্ষণীয় **ইন্টারেক্টিভ পেমেন্ট সামারি মডাল (Popup Summary Modal)** যুক্ত করে দেওয়া হয়েছে।
+
+### নতুন যা যুক্ত করা হয়েছে:
+1. **ক্লিকেবল পেমেন্ট বাটন:** কাস্টমার যখন **bKash** বা **Nagad** বাটনে ক্লিক করবে, সাথে সাথে স্ক্রিনে একটি নিয়ন গ্লোয়িং পপআপ সামারি বক্স আসবে।
+2. **এক ক্লিকে নম্বর কপি (Copy to Clipboard):** বিকাশ বা নগদের পার্সোনাল নম্বরটির পাশে একটি **"কপি করুন"** বাটন থাকবে, যাতে কাস্টমারদের কষ্ট করে নম্বর টাইপ করতে না হয়।
+3. **পেমেন্ট নির্দেশিকা ও ট্রানজাকশন প্রুফ:** সেন্ড মানি করার পর কীভাবে লাস্ট ডিজিট বা ট্রানজাকশন আইডি হোয়াটসঅ্যাপে পাঠাতে হবে তার স্পষ্ট নির্দেশনা থাকবে।
+4. **সরাসরি হোয়াটসঅ্যাপ কনফার্ম বাটন:** পপআপের ভেতরেই সরাসরি পেমেন্ট স্লিপ পাঠানোর জন্য হোয়াটসঅ্যাপ লিংক থাকবে।
+
+---
+
+সম্পূর্ণ আপডেট কোডটি নিচে দেওয়া হলো। এটি কপি করে আপনার GitHub রিপোজিটরির **`index.html`** ফাইলে আগের সবকিছু মুছে পেস্ট করে **Commit changes** করে দিন:
+
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools Market - প্রিমিয়াম ডিজিটাল টুলস ও সার্ভিস মার্কেটপ্লেস</title>
+  
+  <!-- Google Fonts: Hind Siliguri -->
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap)" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+  
+  <!-- AOS Animation CSS -->
+  <link href="[https://unpkg.com/aos@2.3.1/dist/aos.css](https://unpkg.com/aos@2.3.1/dist/aos.css)" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #040711;
+      --card-bg: rgba(11, 17, 33, 0.88);
+      
+      /* Logo Palette Colors */
+      --logo-cyan: #00d2ff;
+      --logo-blue: #0072ff;
+      --logo-purple: #9b51e0;
+      --logo-magenta: #c471ed;
+      --logo-gradient: linear-gradient(135deg, #00d2ff 0%, #0072ff 45%, #9b51e0 80%, #c471ed 100%);
+      --btn-gradient: linear-gradient(135deg, #00d2ff 0%, #0072ff 50%, #9b51e0 100%);
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --whatsapp-green: #25d366;
+      --gold-accent: #f59e0b;
+      --gold-gradient: linear-gradient(135deg, #f59e0b, #fbbf24, #d97706);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Hind Siliguri', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 30px;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle at 10% 10%, rgba(0, 210, 255, 0.16), transparent 45%),
+                  radial-gradient(circle at 90% 50%, rgba(196, 113, 237, 0.15), transparent 45%),
+                  radial-gradient(circle at 50% 90%, rgba(0, 114, 255, 0.12), transparent 50%);
+    }
+
+    @keyframes textFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes floatWa {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes newCardSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Sticky Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: rgba(4, 7, 17, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+      z-index: 1000;
+      padding: 12px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--logo-cyan);
+    }
+
+    .nav-brand span {
+      font-size: 1.35rem;
+      font-weight: 800;
+      background: var(--logo-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--logo-cyan);
+    }
+
+    .nav-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      padding: 7px 18px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s;
+    }
+
+    .nav-wa-btn:hover {
+      transform: scale(1.04);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      position: relative;
+      text-align: center;
+      padding: 55px 20px 45px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 210, 255, 0.12);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      color: var(--logo-cyan);
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+    }
+
+    .hero-banner h1 {
+      font-size: 2.9rem;
+      font-weight: 800;
+      line-height: 1.25;
+      background: var(--logo-gradient);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textFlow 6s ease infinite;
+      margin-bottom: 15px;
+    }
+
+    .hero-banner p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      max-width: 680px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .hero-btn-primary {
+      background: var(--btn-gradient);
+      color: #fff;
+      padding: 13px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4);
+      transition: all 0.3s;
+    }
+
+    .hero-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 30px rgba(155, 81, 224, 0.6);
+    }
+
+    .hero-btn-secondary {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      color: #fff;
+      padding: 13px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .hero-btn-secondary:hover {
+      background: rgba(0, 210, 255, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Trust Stats Section */
+    .trust-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin: 15px auto 45px;
+    }
+
+    .trust-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      backdrop-filter: blur(8px);
+    }
+
+    .trust-item i {
+      font-size: 1.8rem;
+      color: var(--logo-cyan);
+      filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.5));
+    }
+
+    .trust-item h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .trust-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    /* Filter Tabs */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 30px 0;
+    }
+
+    .filter-btn {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      color: #cbd5e1;
+      padding: 9px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--btn-gradient);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Section Headings */
+    .section-header {
+      text-align: center;
+      margin: 55px 0 25px;
+    }
+
+    .section-header h2 {
+      display: inline-block;
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00d2ff, #9b51e0, #c471ed);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textFlow 5s linear infinite;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00d2ff, #9b51e0, transparent);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.9);
+      border-radius: 3px;
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+
+    /* Cards */
+    .card-wrapper {
+      position: relative;
+      border-radius: 20px;
+      padding: 1.8px;
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.45), rgba(155, 81, 224, 0.35), rgba(255, 255, 255, 0.05));
+      transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+    }
+
+    .card-wrapper:hover {
+      transform: translateY(-8px);
+      background: var(--logo-gradient);
+      box-shadow: 0 12px 35px rgba(0, 210, 255, 0.4), 0 0 25px rgba(155, 81, 224, 0.35);
+    }
+
+    .card-wrapper.gold-border {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.8), rgba(251, 191, 36, 0.3), rgba(217, 119, 6, 0.1));
+    }
+
+    .card-wrapper.gold-border:hover {
+      background: var(--gold-gradient);
+      box-shadow: 0 12px 40px rgba(245, 158, 11, 0.45);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18.5px;
+      padding: 24px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(14px);
+    }
+
+    .tag {
+      align-self: flex-start;
+      background: rgba(0, 210, 255, 0.12);
+      color: var(--logo-cyan);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
+    }
+
+    .tag.gold {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold-accent);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .tag.purple {
+      background: rgba(196, 113, 237, 0.15);
+      color: var(--logo-magenta);
+      border-color: rgba(196, 113, 237, 0.4);
+    }
+
+    .card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .price-tag {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--logo-cyan);
+      margin-bottom: 16px;
+      text-shadow: 0 0 15px rgba(0, 210, 255, 0.35);
+    }
+
+    .price-tag.gold {
+      color: var(--gold-accent);
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 22px;
+      flex-grow: 1;
+    }
+
+    .features li {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .features li i {
+      color: var(--logo-cyan);
+      font-size: 0.9rem;
+      margin-top: 4px;
+      filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.7));
+    }
+
+    .features li i.gold-icon {
+      color: var(--gold-accent);
+      filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+    }
+
+    .order-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--btn-gradient);
+      color: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.98rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 18px rgba(0, 210, 255, 0.35);
+    }
+
+    .order-btn:hover {
+      box-shadow: 0 6px 28px rgba(155, 81, 224, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .order-btn.gold-btn {
+      background: var(--gold-gradient);
+      color: #000;
+    }
+
+    /* Video Portfolio Showcase Section */
+    .video-showcase-container {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 20px;
+      padding: 30px 24px;
+      margin: 40px auto 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 22px;
+      margin-top: 25px;
+    }
+
+    .video-card {
+      background: rgba(6, 11, 24, 0.9);
+      border: 1px solid rgba(155, 81, 224, 0.35);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--logo-cyan);
+      box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3);
+    }
+
+    .video-thumbnail-box {
+      width: 100%;
+      height: 145px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.12), rgba(155, 81, 224, 0.22));
+      border: 1px dashed rgba(0, 210, 255, 0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: #fff;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .video-thumbnail-box i {
+      font-size: 2.7rem;
+      color: var(--logo-cyan);
+    }
+
+    .video-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 210, 255, 0.2);
+      border: 1px solid rgba(0, 210, 255, 0.5);
+      color: var(--logo-cyan);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    .video-card h4 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 6px;
+    }
+
+    .video-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .video-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: rgba(24, 119, 242, 0.15);
+      border: 1px solid rgba(24, 119, 242, 0.45);
+      color: #38bdf8;
+      padding: 11px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 0.3s ease;
+    }
+
+    .video-link-btn:hover {
+      background: #1877f2;
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(24, 119, 242, 0.45);
+      transform: translateY(-2px);
+    }
+
+    /* Customer Reviews Slider */
+    .reviews-section {
+      margin-top: 65px;
+      text-align: center;
+    }
+
+    .slider-container {
+      position: relative;
+      max-width: 850px;
+      margin: 25px auto 0;
+      overflow: hidden;
+      border-radius: 20px;
+      padding: 2px;
+      background: var(--logo-gradient);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      border-radius: 18px;
+      background: rgba(10, 15, 30, 0.95);
+    }
+
+    .slide {
+      min-width: 100%;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .slide img {
+      max-width: 100%;
+      max-height: 420px;
+      border-radius: 14px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+      object-fit: contain;
+    }
+
+    .slider-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .slider-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .slider-btn:hover {
+      background: var(--logo-cyan);
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+    }
+
+    /* Live Interactive Review System */
+    .review-system-box {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      border-radius: 20px;
+      padding: 30px 22px;
+      margin: 45px auto 20px;
+      max-width: 850px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+    }
+
+    .star-select {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 12px 0 18px;
+      font-size: 1.7rem;
+      cursor: pointer;
+    }
+
+    .star-select i {
+      color: #475569;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .star-select i:hover {
+      transform: scale(1.15);
+    }
+
+    .star-select i.active {
+      color: #f59e0b;
+      filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+    }
+
+    .review-form input, .review-form textarea {
+      width: 100%;
+      background: rgba(4, 7, 17, 0.7);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .review-form input:focus, .review-form textarea:focus {
+      border-color: var(--logo-cyan);
+    }
+
+    .review-success-msg {
+      display: none;
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      color: #25d366;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 0.92rem;
+    }
+
+    .review-cards-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .user-review-card {
+      background: rgba(6, 11, 24, 0.9);
+      border: 1px solid rgba(0, 210, 255, 0.15);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: newCardSlide 0.5s ease-out;
+    }
+
+    .user-review-card .rev-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .user-review-card .user-name {
+      font-weight: 700;
+      color: #f8fafc;
+      font-size: 1rem;
+    }
+
+    .user-review-card .stars {
+      color: #f59e0b;
+      font-size: 0.85rem;
+    }
+
+    .user-review-card .rev-text {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 800px;
+      margin: 60px auto 0;
+    }
+
+    .faq-item {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(0, 210, 255, 0.2);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+
+    .faq-question {
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    .faq-question:hover {
+      background: rgba(0, 210, 255, 0.08);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out;
+      padding: 0 20px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      border-top: 1px solid transparent;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 14px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      max-height: 200px;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+      color: var(--logo-cyan);
+    }
+
+    /* Interactive Payment Section & Modal */
+    .payment-section {
+      text-align: center;
+      margin: 50px 0 20px;
+    }
+
+    .payment-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .pay-btn-badge {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .pay-btn-badge:hover {
+      transform: translateY(-3px);
+      border-color: var(--logo-cyan);
+      box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
+    }
+
+    .pay-btn-badge.bkash:hover {
+      border-color: #e2136e;
+      box-shadow: 0 6px 20px rgba(226, 19, 110, 0.4);
+    }
+
+    .pay-btn-badge.nagad:hover {
+      border-color: #f7941d;
+      box-shadow: 0 6px 20px rgba(247, 148, 29, 0.4);
+    }
+
+    /* Payment Summary Modal */
+    .payment-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(4, 7, 17, 0.82);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .payment-modal-card {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1.5px solid var(--logo-cyan);
+      border-radius: 20px;
+      max-width: 460px;
+      width: 100%;
+      padding: 26px 24px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0, 210, 255, 0.35);
+      animation: newCardSlide 0.35s ease-out;
+      text-align: center;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      color: #fff;
+    }
+
+    .modal-method-logo {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-method-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .number-display-box {
+      background: rgba(4, 7, 17, 0.9);
+      border: 1px dashed rgba(0, 210, 255, 0.5);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 15px 0;
+    }
+
+    .number-text {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--logo-cyan);
+    }
+
+    .copy-btn {
+      background: var(--btn-gradient);
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: transform 0.2s;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.95);
+    }
+
+    .modal-instructions {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .modal-instructions li {
+      margin-left: 18px;
+      margin-bottom: 5px;
+    }
+
+    /* Floating WhatsApp Button */
+    .floating-wa {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25d366;
+      color: #fff;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 25px rgba(37, 211, 102, 0.55);
+      text-decoration: none;
+      z-index: 999;
+      animation: floatWa 3s ease-in-out infinite;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px 10px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-top: 60px;
+    }
+
+    .footer-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37, 211, 102, 0.12);
+      color: var(--whatsapp-green);
+      padding: 9px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 12px;
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.15);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: rgba(4, 7, 17, 0.95);
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-banner h1 {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-bg"></div>
+
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <a href="#" class="nav-brand">
+      <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
+      <span>Tools Market</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#popular">টুলস</a></li>
+      <li><a href="#combo">কম্বো প্যাকেজ</a></li>
+      <li><a href="#services">সার্ভিসেস</a></li>
+      <li><a href="#video">প্রমোশনাল ভিডিও সার্ভিস</a></li>
+      <li><a href="#reviews">রিভিউ</a></li>
+    </ul>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20এর%20সার্ভিস%20সম্পর্কে%20জানতে%20চাই।" target="_blank" class="nav-wa-btn">
+        <i class="fab fa-whatsapp"></i> অর্ডার করুন
+      </a>
+      <button class="menu-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner" data-aos="fade-down" data-aos-duration="1000">
+    <div class="hero-badge">
+      <i class="fas fa-bolt"></i> প্রিমিয়াম ডিজিটাল টুলস ও ভেরিফাইড সার্ভিস মার্কেটপ্লেস
+    </div>
+    <h1>আপনার ডিজিটাল কাজকে করুন আরও সহজ ও প্রফেশনাল</h1>
+    <p>
+      সেরা মূল্যে এআই টুলস, স্টাডি ও থিসিস কম্বো, মেটা ভেরিফিকেশন, ফলোয়ার গ্রোথ এবং হাই-কনভার্টিং প্রমোশনাল ভিডিও মেকিং সার্ভিস—সবকিছু এক বিশ্বস্ত প্ল্যাটফর্মে।
+    </p>
+    <div class="hero-actions">
+      <a href="#combo" class="hero-btn-primary"><i class="fas fa-gift"></i> প্যাকেজ সমূহ দেখুন</a>
+      <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20সরাসরি%20প্যাকেজ%20সম্পর্কে%20কথা%20বলতে%20চাই।" target="_blank" class="hero-btn-secondary">
+        <i class="fab fa-whatsapp"></i> সরাসরি চ্যাট করুন
+      </a>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- ট্রাস্ট ও স্ট্যাটাস ব্যাজ -->
+    <div class="trust-badges" data-aos="fade-up" data-aos-duration="800">
+      <div class="trust-item">
+        <i class="fas fa-bolt"></i>
+        <div>
+          <h4>ইনস্ট্যান্ট ডেলিভারি</h4>
+          <p>পেমেন্টের ৫-১৫ মিনিটে ডেলিভারি</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <i class="fas fa-shield-alt"></i>
+        <div>
+          <h4>রিপ্লেসমেন্ট গ্যারান্টি</h4>
+          <p>ফুল মেয়াদ অফিসিয়াল সাপোর্ট</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <i class="fas fa-users"></i>
+        <div>
+          <h4>১,০০০+ সন্তুষ্ট গ্রাহক</h4>
+          <p>সারা দেশে বিশ্বস্ততার সাথে সেবা</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <i class="fas fa-headset"></i>
+        <div>
+          <h4>২৪/৭ লাইভ সাপোর্ট</h4>
+          <p>হোয়াটসঅ্যাপে তাৎক্ষণিক হেল্প</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ক্যাটাগরি ফিল্টার বাটন -->
+    <div class="filter-tabs" data-aos="fade-up">
+      <button class="filter-btn active" onclick="filterItems('all')">সবগুলো</button>
+      <button class="filter-btn" onclick="filterItems('popular')">🔥 পপুলার টুলস</button>
+      <button class="filter-btn" onclick="filterItems('combo')">💎 কম্বো প্যাকেজ</button>
+      <button class="filter-btn" onclick="filterItems('service')">🛡️ স্পেশাল সার্ভিস</button>
+      <button class="filter-btn" onclick="filterItems('video')">🎬 প্রমোশনাল ভিডিও সার্ভিস</button>
+    </div>
+
+    <!-- সেকশন ১: মোস্ট পপুলার ৩টি টুলস -->
+    <div class="category-block cat-popular" id="popular">
+      <div class="section-header" data-aos="fade-up">
+        <h2>🔥 মোস্ট পপুলার প্রিমিয়াম টুলস</h2>
+      </div>
+
+      <div class="grid">
+        <!-- 1. Gemini AI Pro -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="100">
+          <div class="card">
+            <span class="tag">⭐ হাই ডিমান্ড টুল</span>
+            <h3>Gemini AI Pro</h3>
+            <div class="price-tag">১৮ মাসের প্রিমিয়াম অ্যাক্সেস</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> ৫ টিবি (5TB) ক্লাউড স্টোরেজ সহ</li>
+              <li><i class="fas fa-check-circle"></i> অ্যাডভান্সড এআই রিসার্চ ও প্রম্পট সাপোর্ট</li>
+              <li><i class="fas fa-check-circle"></i> ফুল মেয়াদ রিপ্লেসমেন্ট গ্যারান্টি</li>
+              <li><i class="fas fa-check-circle"></i> হাই স্পিড ডেডিকেটেড পারফরম্যান্স</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20Gemini%20AI%20Pro%20(১৮%20মাস)%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- 2. CapCut Pro -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="200">
+          <div class="card">
+            <span class="tag">🎬 বেস্ট ভিডিও এডিটর</span>
+            <h3>CapCut Pro (ক্যাপকাট প্রো)</h3>
+            <div class="price-tag">১ মাসের সাবস্ক্রিপশন</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> পিসি ও মোবাইল উভয় ডিভাইসে স্মুথ ব্যবহার</li>
+              <li><i class="fas fa-check-circle"></i> সব প্রো ইফেক্ট, ফিল্টার, ট্রানজিশন আনলক</li>
+              <li><i class="fas fa-check-circle"></i> 4K এক্সপোর্ট ও ওয়াটারমার্ক ছাড়া আউটপুট</li>
+              <li><i class="fas fa-check-circle"></i> ফুল ওয়ারেন্টি ও ইনস্ট্যান্ট ডেলিভারি</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20CapCut%20Pro%20(১%20মাস)%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- 3. Canva Pro -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="300">
+          <div class="card">
+            <span class="tag purple">🎨 পার্সোনাল মেইল অ্যাক্টিভ</span>
+            <h3>Canva Pro (ক্যানভা প্রো)</h3>
+            <div class="price-tag">৬ মাস / ১ বছর প্যাকেজ</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> আপনার নিজস্ব পার্সোনাল জিমেইলে অ্যাক্টিভেশন</li>
+              <li><i class="fas fa-check-circle"></i> আনলিমিটেড প্রিমিয়াম টেমপ্লেট ও গ্রাফিক্স</li>
+              <li><i class="fas fa-check-circle"></i> ব্র্যান্ড কিট ও ফুল রিপ্লেসমেন্ট সাপোর্ট</li>
+              <li><i class="fas fa-check-circle"></i> ১০০% নিরাপদ ও লিগ্যাল মেথড</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20Canva%20Pro%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- সেকশন ২: স্পেশাল কম্বো প্যাকেজ সমূহ -->
+    <div class="category-block cat-combo" id="combo">
+      <div class="section-header" data-aos="fade-up">
+        <h2>💎 স্পেশাল কম্বো প্যাকেজ (Study, Thesis & Research)</h2>
+      </div>
+
+      <div class="grid">
+        <!-- SILVER PACKAGE -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="100">
+          <div class="card">
+            <span class="tag">বেসিক কম্বো</span>
+            <h3>SILVER PACKAGE</h3>
+            <div class="price-tag">মাত্র ২৪৯৳</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated)</li>
+              <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস</li>
+              <li><i class="fas fa-check-circle"></i> কুইলবট প্রিমিয়াম</li>
+              <li><i class="fas fa-check-circle"></i> গ্রামারলি প্রিমিয়াম</li>
+              <li><i class="fas fa-check-circle"></i> সর্বোচ্চ আপটাইম ও ২৪/৭ ফাস্ট সাপোর্ট</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20SILVER%20PACKAGE%20(২৪৯৳)%20অর্ডার%20করতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- AI MASTER PACKAGE -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="200">
+          <div class="card">
+            <span class="tag">জনপ্রিয় চয়েস</span>
+            <h3>AI MASTER PACKAGE</h3>
+            <div class="price-tag">মাত্র ৩৪৯৳</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated)</li>
+              <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস</li>
+              <li><i class="fas fa-check-circle"></i> কুইলবট প্রিমিয়াম</li>
+              <li><i class="fas fa-check-circle"></i> গ্রামারলি প্রিমিয়াম</li>
+              <li><i class="fas fa-check-circle"></i> পারপ্লেক্সিটি প্রো (Deep Research)</li>
+              <li><i class="fas fa-check-circle"></i> পেপারপাল</li>
+              <li><i class="fas fa-check-circle"></i> ক্যানভা প্রো</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20AI%20MASTER%20PACKAGE%20(৩৪৯৳)%20অর্ডার%20করতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- GOLDEN PACKAGE -->
+        <div class="card-wrapper gold-border" data-aos="fade-up" data-aos-delay="300">
+          <div class="card">
+            <span class="tag gold">👑 বেস্ট ভ্যালু গোল্ডেন কম্বো</span>
+            <h3>GOLDEN PACKAGE</h3>
+            <div class="price-tag gold">মাত্র ৪৪৯৳</div>
+            <ul class="features">
+              <li><i class="fas fa-shield-alt gold-icon"></i> টার্নিটিন ইন্সট্রাক্টর (Ai & Similarity 1 File Check)</li>
+              <li><i class="fas fa-check-circle gold-icon"></i> চ্যাটজিপিটি প্লাস (Updated জিপিটি ৫)</li>
+              <li><i class="fas fa-check-circle gold-icon"></i> হিক্স বাইপাস</li>
+              <li><i class="fas fa-check-circle gold-icon"></i> কুইলবট প্রিমিয়াম</li>
+              <li><i class="fas fa-check-circle gold-icon"></i> গ্রামারলি প্রিমিয়াম</li>
+              <li><i class="fas fa-check-circle gold-icon"></i> পারপ্লেক্সিটি প্রো (Deep Research)</li>
+              <li><i class="fas fa-check-circle gold-icon"></i> পেপারপাল ও স্কিলশেয়ার</li>
+              <li><i class="fas fa-gift gold-icon"></i> সাথে ৩ টি আকর্ষণীয় টুলস বোনাস!</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20GOLDEN%20PACKAGE%20(৪৪৯৳)%20অর্ডার%20করতে%20চাই।" target="_blank" class="order-btn gold-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- PLATINUM PACKAGE -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="400">
+          <div class="card">
+            <span class="tag purple">🚀 আল্টিমেট কম্বো</span>
+            <h3>PLATINUM PACKAGE</h3>
+            <div class="price-tag">মাত্র ৭৯৯৳</div>
+            <ul class="features">
+              <li><i class="fas fa-shield-alt"></i> টার্নিটিন ইন্সট্রাক্টর (Ai & Similarity 2 File Check)</li>
+              <li><i class="fas fa-check-circle"></i> স্টেলথরাইটার (Per day 15 Humanize)</li>
+              <li><i class="fas fa-check-circle"></i> চ্যাটজিপিটি প্লাস (Updated Version)</li>
+              <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস ও কুইলবট প্রিমিয়াম</li>
+              <li><i class="fas fa-check-circle"></i> গ্রামারলি ও পারপ্লেক্সিটি প্রো (ডীপ রিসার্চ)</li>
+              <li><i class="fas fa-check-circle"></i> পেপারপাল প্রাইম ও জেনি এ আই</li>
+              <li><i class="fas fa-gift"></i> সাথে আরো স্পেশাল বোনাস টুলস!</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20PLATINUM%20PACKAGE%20(৭৯৯৳)%20অর্ডার%20করতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- সেকশন ৩: বিশেষ সিঙ্গেল ও সিকিউরিটি সার্ভিস -->
+    <div class="category-block cat-service" id="services">
+      <div class="section-header" data-aos="fade-up">
+        <h2>🛡️ স্পেশাল সিঙ্গেল AI ও সিকিউরিটি সার্ভিস</h2>
+      </div>
+
+      <div class="grid">
+        <!-- Professional Business Page Setup -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="100">
+          <div class="card">
+            <span class="tag purple">💼 বিজনেস সল্যুশন</span>
+            <h3>প্রফেশনাল বিজনেস পেজ সেটআপ</h3>
+            <div class="price-tag">A to Z ফুল পেজ অপটিমাইজেশন</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> এসইও ফ্রেন্ডলি পেজ নেম ও ইউজারনেম সেটআপ</li>
+              <li><i class="fas fa-check-circle"></i> প্রফেশনাল লোগো ও কভার ফটো ডিজাইন ইন্টিগ্রেশন</li>
+              <li><i class="fas fa-check-circle"></i> অটোমেটেড মেসেঞ্জার ও হোয়াটসঅ্যাপ চ্যাটবট সেটআপ</li>
+              <li><i class="fas fa-check-circle"></i> কল-টু-অ্যাকশন বাটন, সার্ভিস লিস্ট ও শপ সেটআপ</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20প্রফেশনাল%20বিজনেস%20পেজ%20সেটআপ%20সার্ভিসটি%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- Follower Service -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="200">
+          <div class="card">
+            <span class="tag">🚀 সোশ্যাল গ্রোথ</span>
+            <h3>সোশ্যাল মিডিয়া ফলোয়ার সার্ভিস</h3>
+            <div class="price-tag">ফেসবুক ও ইনস্টাগ্রাম ফলোয়ার</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> ফেসবুক পেজ ও প্রোফাইল ফলোয়ার</li>
+              <li><i class="fas fa-check-circle"></i> ইনস্টাগ্রাম হাই কোয়ালিটি ফলোয়ার ও লাইকস</li>
+              <li><i class="fas fa-check-circle"></i> নন-ড্রপ ও লাইফটাইম রিফিল গ্যারান্টি</li>
+              <li><i class="fas fa-check-circle"></i> সম্পূর্ণ নিরাপদ ও কোনো পাসওয়ার্ড ছাড়াই সেটআপ</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20সোশ্যাল%20মিডিয়া%20ফলোয়ার%20সার্ভিস%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- StealthWriter -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="300">
+          <div class="card">
+            <span class="tag">⚡ ১০০% হিউম্যানাইজ</span>
+            <h3>StealthWriter</h3>
+            <div class="price-tag">মাত্র ৩৯৯ টাকা</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> AI লেখা ১০০% হিউম্যানাইজ করার সেরা সল্যুশন</li>
+              <li><i class="fas fa-check-circle"></i> ডেইলি লিমিট: প্রতিদিন ১৫টি Humanize</li>
+              <li><i class="fas fa-check-circle"></i> মেয়াদ: ১ মাস মেয়াদি ফুল সাপোর্ট</li>
+              <li><i class="fas fa-check-circle"></i> অ্যাসাইনমেন্ট, থিসিস ও কনটেন্ট রাইটিং উপযোগী</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20StealthWriter%20(৩৯৯৳)%20অর্ডার%20করতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- FB Verification -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="400">
+          <div class="card">
+            <span class="tag purple">সোশ্যাল মিডিয়া</span>
+            <h3>FB আইডি ও পেজ ভেরিফিকেশন</h3>
+            <div class="price-tag">মেটা ব্লু টিক ভেরিফাইড সার্ভিস</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> ১০০% নিরাপদ ও লিগ্যাল মেথড</li>
+              <li><i class="fas fa-check-circle"></i> পার্সোনাল প্রোফাইল বা বিজনেস পেজ সেটআপ</li>
+              <li><i class="fas fa-check-circle"></i> ফুল সাপোর্ট ও কমপ্লিট গাইডলাইন</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20FB%20Verification%20সার্ভিস%20সম্পর্কে%20জানতে%20চাই।" target="_blank" class="order-btn">যোগাযোগ করুন</a>
+          </div>
+        </div>
+
+        <!-- Verified BM -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="500">
+          <div class="card">
+            <span class="tag">অ্যাডস ও মার্কেটিং</span>
+            <h3>Verified Business Manager (BM)</h3>
+            <div class="price-tag">গ্রিন ব্যাজ ভেরিফাইড BM</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> ফেসবুক অ্যাড রান করার চূড়ান্ত সমাধান</li>
+              <li><i class="fas fa-check-circle"></i> আনলিমিটেড ডেইলি স্পেন্ড লিমিট সুবিধা</li>
+              <li><i class="fas fa-check-circle"></i> দ্রুত ডেলিভারি ও ফুল রিপ্লেসমেন্ট গ্যারান্টি</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20Verified%20BM%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+
+        <!-- VPN Services -->
+        <div class="card-wrapper" data-aos="fade-up" data-aos-delay="600">
+          <div class="card">
+            <span class="tag">সিকিউরিটি ও প্রাইভেসি</span>
+            <h3>হাই স্পিড প্রিমিয়াম ভিপিএন</h3>
+            <div class="price-tag">Nord / Express / Surfshark</div>
+            <ul class="features">
+              <li><i class="fas fa-check-circle"></i> হাই স্পিড ডেডিকেটেড আইপি ও সুপার ফাস্ট সার্ভার</li>
+              <li><i class="fas fa-check-circle"></i> পিসি ও মোবাইলে নিরবচ্ছিন্ন আনলিমিটেড ব্যবহার</li>
+              <li><i class="fas fa-check-circle"></i> ফুল মেয়াদ রিপ্লেসমেন্ট ও টেকনিক্যাল সাপোর্ট</li>
+            </ul>
+            <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20Premium%20VPN%20নিতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- সেকশন ৪: প্রমোশনাল ভিডিও কনটেন্ট সার্ভিস -->
+    <div class="category-block cat-video" id="video">
+      <div class="section-header" data-aos="fade-up">
+        <h2>🎬 প্রমোশনাল ভিডিও সার্ভিস (আমাদের ক্লায়েন্টদের সফল কাজ)</h2>
+      </div>
+
+      <div class="video-showcase-container" data-aos="fade-up">
+        <p style="text-align: center; color: var(--text-muted); max-width: 680px; margin: 0 auto 10px; font-size: 1rem;">
+          আপনার ব্যবসা, ব্র্যান্ড বা ডিজিটাল সার্ভিসের সেলস বহুগুণ বাড়াতে আকর্ষণীয় ভিডিও অ্যাড বানিয়ে নিন। নিচে আমাদের ক্লায়েন্টদের জন্য তৈরি করা কিছু রিয়েল প্রজেক্ট দেখুন:
+        </p>
+
+        <div class="video-grid">
+          <div class="video-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="video-thumbnail-box" onclick="window.open('[https://www.facebook.com/share/r/1DhimH7tZH/](https://www.facebook.com/share/r/1DhimH7tZH/)', '_blank')">
+              <span class="video-tag">CLIENT WORK</span>
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.88rem; margin-top: 8px; font-weight: 700; color: #fff;">ভিডিও প্লে করুন ↗</span>
+            </div>
+            <h4>ক্লায়েন্ট প্রজেক্ট #১</h4>
+            <p>হাই-কনভার্টিং ডিজিটাল সেলস প্রমোশন ও আকর্ষণীয় ভিডিও অ্যাড।</p>
+            <a href="[https://www.facebook.com/share/r/1DhimH7tZH/](https://www.facebook.com/share/r/1DhimH7tZH/)" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল ওপেন করুন ↗
+            </a>
+          </div>
+
+          <div class="video-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="video-thumbnail-box" onclick="window.open('[https://www.facebook.com/share/r/1JvMFHMbJQ/](https://www.facebook.com/share/r/1JvMFHMbJQ/)', '_blank')">
+              <span class="video-tag">CLIENT WORK</span>
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.88rem; margin-top: 8px; font-weight: 700; color: #fff;">ভিডিও প্লে করুন ↗</span>
+            </div>
+            <h4>ক্লায়েন্ট প্রজেক্ট #২</h4>
+            <p>সোশ্যাল মিডিয়া পেইড ক্যাম্পেইন ও ভাইরাল ফরম্যাট প্রমোশনাল ভিডিও।</p>
+            <a href="[https://www.facebook.com/share/r/1JvMFHMbJQ/](https://www.facebook.com/share/r/1JvMFHMbJQ/)" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল ওপেন করুন ↗
+            </a>
+          </div>
+
+          <div class="video-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="video-thumbnail-box" onclick="window.open('[https://www.facebook.com/share/r/1CKR7R8boB/](https://www.facebook.com/share/r/1CKR7R8boB/)', '_blank')">
+              <span class="video-tag">CLIENT WORK</span>
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.88rem; margin-top: 8px; font-weight: 700; color: #fff;">ভিডিও প্লে করুন ↗</span>
+            </div>
+            <h4>ক্লায়েন্ট প্রজেক্ট #৩</h4>
+            <p>প্রিমিয়াম মোশন গ্রাফিক্স ও ডায়নামিক ট্রানজিশন সহ ব্র্যান্ডিং ভিডিও।</p>
+            <a href="[https://www.facebook.com/share/r/1CKR7R8boB/](https://www.facebook.com/share/r/1CKR7R8boB/)" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল ওপেন করুন ↗
+            </a>
+          </div>
+
+          <div class="video-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="video-thumbnail-box" onclick="window.open('[https://www.facebook.com/share/r/19qc5DamWW/](https://www.facebook.com/share/r/19qc5DamWW/)', '_blank')">
+              <span class="video-tag">CLIENT WORK</span>
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.88rem; margin-top: 8px; font-weight: 700; color: #fff;">ভিডিও প্লে করুন ↗</span>
+            </div>
+            <h4>ক্লায়েন্ট প্রজেক্ট #৪</h4>
+            <p>সার্ভিস রিভিউ, টেক্সট অ্যানিমেশন ও ক্লিয়ার ভয়েসওভার পেয়ারিং ভিডিও।</p>
+            <a href="[https://www.facebook.com/share/r/19qc5DamWW/](https://www.facebook.com/share/r/19qc5DamWW/)" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল ওপেন করুন ↗
+            </a>
+          </div>
+
+          <div class="video-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="video-thumbnail-box" onclick="window.open('[https://www.facebook.com/share/r/1G2hGrPAXg/](https://www.facebook.com/share/r/1G2hGrPAXg/)', '_blank')">
+              <span class="video-tag">CLIENT WORK</span>
+              <i class="fab fa-facebook"></i>
+              <span style="font-size: 0.88rem; margin-top: 8px; font-weight: 700; color: #fff;">ভিডিও প্লে করুন ↗</span>
+            </div>
+            <h4>ক্লায়েন্ট প্রজেক্ট #৫</h4>
+            <p>প্রোডাক্ট ফিচার ও অফার হাইলাইট করা প্রফেশনাল সোশ্যাল মিডিয়া রিল।</p>
+            <a href="[https://www.facebook.com/share/r/1G2hGrPAXg/](https://www.facebook.com/share/r/1G2hGrPAXg/)" target="_blank" class="video-link-btn">
+              <i class="fas fa-play-circle"></i> ফেসবুক রিল ওপেন করুন ↗
+            </a>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 32px;" data-aos="zoom-in">
+          <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20আমার%20ব্যবসার%20জন্য%20প্রমোশনাল%20ভিডিও%20বানাতে%20চাই।" target="_blank" class="order-btn" style="display: inline-block; width: auto; padding: 13px 40px;">
+            <i class="fas fa-video"></i> আপনার প্রমোশনাল ভিডিও অর্ডার করতে কথা বলুন
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- কাস্টমার রিভিউ স্ক্রিনশট স্লাইডার -->
+    <div class="reviews-section" id="reviews" data-aos="zoom-in" data-aos-duration="900">
+      <div class="section-header">
+        <h2>🌟 ক্লায়েন্ট ফিডব্যাক ও প্রুফ</h2>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-track" id="sliderTrack">
+          <div class="slide"><img src="review1.jpg" alt="Review 1"></div>
+          <div class="slide"><img src="review2.jpg" alt="Review 2"></div>
+          <div class="slide"><img src="review3.jpg" alt="Review 3"></div>
+          <div class="slide"><img src="review4.jpg" alt="Review 4"></div>
+        </div>
+      </div>
+
+      <div class="slider-nav">
+        <button class="slider-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+
+    <!-- ইন্টারেক্টিভ ৫-স্টার লাইভ রিভিউ ফর্ম ও ডিসপ্লে সেকশন -->
+    <div class="review-system-box" data-aos="fade-up">
+      <h3 style="text-align: center; font-size: 1.4rem; color: #fff; margin-bottom: 6px;">
+        ✍️ আপনার মূল্যবান মতামত ও স্টার রেটিং দিন
+      </h3>
+      <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+        Tools Market থেকে সার্ভিস নিয়ে আপনার কেমন লেগেছে তা শেয়ার করুন:
+      </p>
+
+      <div class="review-success-msg" id="reviewSuccessMsg">
+        🎉 ধন্যবাদ! আপনার মূল্যবান রিভিউটি সফলভাবে প্রকাশিত হয়েছে।
+      </div>
+
       <div class="star-select" id="starContainer">
         <i class="fas fa-star active" onclick="setRating(1)"></i>
         <i class="fas fa-star active" onclick="setRating(2)"></i>
@@ -1382,7 +3024,7 @@
         <i class="fas fa-star active" onclick="setRating(5)"></i>
       </div>
 
-      <form class="review-form" onsubmit="submitUserReview(event)">
+      <form class="review-form" id="customerReviewForm" onsubmit="submitUserReview(event)">
         <input type="text" id="reviewerName" placeholder="আপনার নাম লিখুন..." required>
         <textarea id="reviewerFeedback" rows="3" placeholder="সার্ভিস কেমন লেগেছে বিস্তারিত লিখুন..." required></textarea>
         <button type="submit" class="order-btn" style="border: none; cursor: pointer;">
@@ -1448,44 +3090,76 @@
     </div>
 
 
-    <!-- পেমেন্ট পার্টনার সেকশন -->
+    <!-- ইন্টারেক্টিভ পেমেন্ট মেথড সেকশন -->
     <div class="payment-section" data-aos="fade-up">
-      <p style="color: var(--text-muted); font-size: 0.95rem;">পেমেন্ট মেথড সমূহ</p>
+      <h3 style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 4px;">💳 পেমেন্ট মেথড সমূহ</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem;">পেমেন্ট ইনফরমেশন ও নম্বর দেখতে যেকোনো মেথডে ক্লিক করুন</p>
+      
       <div class="payment-badges">
-        <div class="pay-badge"><i class="fas fa-wallet" style="color: #e2136e;"></i> bKash (বিকাশ)</div>
-        <div class="pay-badge"><i class="fas fa-mobile-alt" style="color: #f7941d;"></i> Nagad (নগদ)</div>
-        <div class="pay-badge"><i class="fas fa-university" style="color: #8c3494;"></i> Rocket (রকেট)</div>
-        <div class="pay-badge"><i class="fas fa-credit-card" style="color: #00a4e4;"></i> Cellfin & Bank</div>
+        <div class="pay-btn-badge bkash" onclick="openPaymentModal('bkash')">
+          <i class="fas fa-wallet" style="color: #e2136e; font-size: 1.2rem;"></i> bKash (বিকাশ)
+        </div>
+        <div class="pay-btn-badge nagad" onclick="openPaymentModal('nagad')">
+          <i class="fas fa-mobile-alt" style="color: #f7941d; font-size: 1.2rem;"></i> Nagad (নগদ)
+        </div>
+        <div class="pay-btn-badge rocket" onclick="openPaymentModal('rocket')">
+          <i class="fas fa-university" style="color: #8c3494; font-size: 1.2rem;"></i> Rocket ও অন্যান্য
+        </div>
       </div>
     </div>
 
   </div>
 
+  <!-- পেমেন্ট ইনফরমেশন সামারি পপআপ মডাল -->
+  <div class="payment-modal-overlay" id="paymentModalOverlay" onclick="closePaymentModal(event)">
+    <div class="payment-modal-card" id="paymentModalCard">
+      <button class="modal-close-btn" onclick="hidePaymentModal()"><i class="fas fa-times"></i></button>
+      
+      <div class="modal-method-logo" id="modalLogo"></div>
+      <div class="modal-method-title" id="modalTitle"></div>
+      
+      <div class="number-display-box">
+        <span class="number-text" id="modalNumber"></span>
+        <button class="copy-btn" id="copyBtn" onclick="copyNumber()">
+          <i class="fas fa-copy"></i> কপি করুন
+        </button>
+      </div>
+
+      <ul class="modal-instructions" id="modalInstructions">
+        <li>উপরে দেওয়া নম্বরে <strong>Send Money (সেন্ড মানি)</strong> করুন।</li>
+        <li>টাকা পাঠানোর পর ট্রানজাকশন আইডি (TrxID) বা শেষ ৪ ডিজিট সংরক্ষণ করুন।</li>
+        <li>নিচের বাটনে চাপ দিয়ে সরাসরি হোয়াটসঅ্যাপে পেমেন্টের স্ক্রিনশট বা তথ্য পাঠিয়ে কনফার্ম করুন।</li>
+      </ul>
+
+      <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20পেমেন্ট%20করেছি।" target="_blank" class="order-btn" style="text-decoration: none;">
+        <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপে পেমেন্ট প্রুফ পাঠান
+      </a>
+    </div>
+  </div>
+
   <!-- ফ্লোটিং হোয়াটসঅ্যাপ বাটন -->
-  <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20Tools%20Market%20এর%20সার্ভিস%20সম্পর্কে%20জানতে%20চাই।" target="_blank" class="floating-wa" title="WhatsApp Us">
+  <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমি%20Tools%20Market%20এর%20সার্ভিস%20সম্পর্কে%20জানতে%20চাই।" target="_blank" class="floating-wa" title="WhatsApp Us">
     <i class="fab fa-whatsapp"></i>
   </a>
 
   <!-- Footer -->
   <footer>
     <p>প্রয়োজনীয় কোনো টুলস বা সার্ভিস তালিকায় নেই? সরাসরি আমাদের জানান।</p>
-    <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমার%20অন্য%20একটি%20টুলস%20বা%20সার্ভিস%20প্রয়োজন।" target="_blank" class="footer-whatsapp">
+    <a href="[https://wa.me/8801820232076?text=আসস](https://wa.me/8801820232076?text=আসস)ালামু%20আলাইকুম,%20আমার%20অন্য%20একটি%20টুলস%20বা%20সার্ভিস%20প্রয়োজন।" target="_blank" class="footer-whatsapp">
       <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ: +880 1820-232076
     </a>
     <p style="margin-top: 15px;">&copy; Tools Market. All Rights Reserved.</p>
   </footer>
 
   <!-- AOS Animation Script -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="[https://unpkg.com/aos@2.3.1/dist/aos.js](https://unpkg.com/aos@2.3.1/dist/aos.js)"></script>
   <script>
-    // Initialize Scroll Animations
     AOS.init({
       once: true,
       duration: 800,
       offset: 50
     });
 
-    // Mobile Navbar Toggle
     function toggleNav() {
       document.getElementById('navLinks').classList.toggle('show');
     }
@@ -1518,7 +3192,7 @@
       });
     });
 
-    // Interactive Star Rating Logic
+    // Star Rating
     let selectedRating = 5;
     function setRating(rating) {
       selectedRating = rating;
@@ -1532,11 +3206,33 @@
       });
     }
 
-    // Submit User Review Handler
+    // Load saved reviews from LocalStorage
+    function loadSavedReviews() {
+      const saved = JSON.parse(localStorage.getItem('tm_user_reviews') || '[]');
+      const container = document.getElementById('reviewCardsList');
+      saved.forEach(rev => {
+        let stars = '';
+        for (let i = 0; i < rev.rating; i++) stars += '<i class="fas fa-star"></i>';
+        const card = document.createElement('div');
+        card.className = 'user-review-card';
+        card.innerHTML = `
+          <div class="rev-head">
+            <span class="user-name">${rev.name}</span>
+            <span class="stars">${stars}</span>
+          </div>
+          <p class="rev-text">${rev.text}</p>
+        `;
+        container.prepend(card);
+      });
+    }
+
+    // Submit Review Handler
     function submitUserReview(e) {
       e.preventDefault();
-      const name = document.getElementById('reviewerName').value;
-      const feedback = document.getElementById('reviewerFeedback').value;
+      const name = document.getElementById('reviewerName').value.trim();
+      const feedback = document.getElementById('reviewerFeedback').value.trim();
+
+      if (!name || !feedback) return;
 
       let starIcons = '';
       for (let i = 0; i < selectedRating; i++) {
@@ -1553,18 +3249,79 @@
         <p class="rev-text">${feedback}</p>
       `;
 
-      document.getElementById('reviewCardsList').prepend(newCard);
+      const listContainer = document.getElementById('reviewCardsList');
+      listContainer.prepend(newCard);
 
-      // WhatsApp Backup Notification
-      const waText = encodeURIComponent(`🌟 নতুন ওয়েবসাইট রিভিউ!\nনাম: ${name}\nরেটিং: ${selectedRating} স্টার\nরিভিউ: ${feedback}`);
-      window.open(`https://wa.me/8801820232076?text=${waText}`, '_blank');
+      const existing = JSON.parse(localStorage.getItem('tm_user_reviews') || '[]');
+      existing.push({ name: name, rating: selectedRating, text: feedback });
+      localStorage.setItem('tm_user_reviews', JSON.stringify(existing));
 
-      alert('ধন্যবাদ! আপনার মূল্যবান রিভিউটি সফলভাবে ওয়েবসাইটে প্রদর্শিত হয়েছে।');
-      e.target.reset();
+      const successMsg = document.getElementById('reviewSuccessMsg');
+      successMsg.style.display = 'block';
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 4000);
+
+      document.getElementById('customerReviewForm').reset();
       setRating(5);
     }
 
-    // Filter Functionality
+    document.addEventListener('DOMContentLoaded', loadSavedReviews);
+
+    // Payment Modal Logic
+    let activeCopyNumber = '';
+
+    function openPaymentModal(type) {
+      const overlay = document.getElementById('paymentModalOverlay');
+      const logo = document.getElementById('modalLogo');
+      const title = document.getElementById('modalTitle');
+      const numDisplay = document.getElementById('modalNumber');
+      const copyBtn = document.getElementById('copyBtn');
+
+      copyBtn.innerHTML = '<i class="fas fa-copy"></i> কপি করুন';
+
+      if (type === 'bkash') {
+        logo.innerHTML = '<i class="fas fa-wallet" style="color: #e2136e;"></i>';
+        title.innerText = 'বিকাশ পার্সোনাল পেমেন্ট';
+        activeCopyNumber = '01738592385';
+        numDisplay.innerText = '01738592385';
+      } else if (type === 'nagad') {
+        logo.innerHTML = '<i class="fas fa-mobile-alt" style="color: #f7941d;"></i>';
+        title.innerText = 'নগদ পার্সোনাল পেমেন্ট';
+        activeCopyNumber = '01925164394';
+        numDisplay.innerText = '01925164394';
+      } else if (type === 'rocket') {
+        logo.innerHTML = '<i class="fas fa-university" style="color: #8c3494;"></i>';
+        title.innerText = 'রকেট ও অন্যান্য মেথড';
+        activeCopyNumber = '01738592385';
+        numDisplay.innerText = '01738592385';
+      }
+
+      overlay.style.display = 'flex';
+    }
+
+    function hidePaymentModal() {
+      document.getElementById('paymentModalOverlay').style.display = 'none';
+    }
+
+    function closePaymentModal(e) {
+      if (e.target.id === 'paymentModalOverlay') {
+        hidePaymentModal();
+      }
+    }
+
+    function copyNumber() {
+      if (!activeCopyNumber) return;
+      navigator.clipboard.writeText(activeCopyNumber).then(() => {
+        const copyBtn = document.getElementById('copyBtn');
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> কপি হয়েছে!';
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fas fa-copy"></i> কপি করুন';
+        }, 2000);
+      });
+    }
+
+    // Filter functionality
     function filterItems(category) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
@@ -1606,4 +3363,4 @@
   </script>
 
 </body>
-</html>
+  </html>

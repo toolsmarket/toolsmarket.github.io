@@ -41,6 +41,7 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Hind Siliguri', sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -48,7 +49,7 @@
       color: var(--text-main);
       line-height: 1.6;
       overflow-x: hidden;
-      padding-bottom: 40px;
+      padding-bottom: 30px;
     }
 
     /* Ambient Background Glow */
@@ -67,12 +68,8 @@
 
     /* Keyframe Animations */
     @keyframes logoPulse {
-      0%, 100% {
-        box-shadow: 0 0 25px rgba(0, 210, 255, 0.45), 0 0 50px rgba(155, 81, 224, 0.35);
-      }
-      50% {
-        box-shadow: 0 0 45px rgba(0, 210, 255, 0.75), 0 0 75px rgba(196, 113, 237, 0.6);
-      }
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 210, 255, 0.45), 0 0 40px rgba(155, 81, 224, 0.35); }
+      50% { box-shadow: 0 0 35px rgba(0, 210, 255, 0.75), 0 0 65px rgba(196, 113, 237, 0.6); }
     }
 
     @keyframes textFlow {
@@ -86,110 +83,175 @@
       50% { transform: translateY(-8px); }
     }
 
-    @keyframes pulsePlay {
-      0%, 100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.6));
-      }
-      50% {
-        transform: scale(1.15);
-        filter: drop-shadow(0 0 20px rgba(255, 51, 102, 0.85));
-      }
+    /* Sticky Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: rgba(4, 7, 17, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+      z-index: 1000;
+      padding: 12px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    /* Header Section */
-    header {
-      text-align: center;
-      padding: 45px 20px 20px;
-    }
-
-    .logo-container {
-      width: 115px;
-      height: 115px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      background: #000;
-      border: 2px solid rgba(0, 210, 255, 0.85);
+    .nav-brand {
       display: flex;
       align-items: center;
-      justify-content: center;
-      animation: logoPulse 4s infinite ease-in-out;
-      overflow: hidden;
+      gap: 12px;
+      text-decoration: none;
     }
 
-    .logo-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .nav-brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--logo-cyan);
     }
 
-    .logo-fallback {
+    .nav-brand span {
+      font-size: 1.35rem;
       font-weight: 800;
-      font-size: 2rem;
       background: var(--logo-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    header h1 {
-      font-size: 2.8rem;
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--logo-cyan);
+    }
+
+    .nav-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      padding: 7px 18px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s;
+    }
+
+    .nav-wa-btn:hover {
+      transform: scale(1.04);
+    }
+
+    /* Mobile Hamburger */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      position: relative;
+      text-align: center;
+      padding: 55px 20px 45px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 210, 255, 0.12);
+      border: 1px solid rgba(0, 210, 255, 0.4);
+      color: var(--logo-cyan);
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+    }
+
+    .hero-banner h1 {
+      font-size: 2.9rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
+      line-height: 1.25;
       background: var(--logo-gradient);
       background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: textFlow 6s ease infinite;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
-    /* Highlighted Banner Box */
-    .tagline-box {
+    .hero-banner p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
       max-width: 680px;
-      margin: 0 auto 22px;
-      padding: 16px 24px;
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(0, 210, 255, 0.35);
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0, 210, 255, 0.08);
-      backdrop-filter: blur(12px);
+      margin: 0 auto 28px;
+      line-height: 1.7;
     }
 
-    .tagline-box .main-highlight {
-      font-size: 1.18rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, #00d2ff, #c471ed);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: block;
-      margin-bottom: 4px;
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 35px;
     }
 
-    .tagline-box .sub-highlight {
-      font-size: 0.98rem;
-      font-weight: 600;
-      color: #e2e8f0;
-      display: block;
-    }
-
-    .whatsapp-btn-top {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #25d366, #128c7e);
+    .hero-btn-primary {
+      background: var(--btn-gradient);
       color: #fff;
-      padding: 12px 34px;
+      padding: 13px 32px;
       border-radius: 50px;
-      text-decoration: none;
       font-weight: 700;
+      text-decoration: none;
       font-size: 1rem;
-      box-shadow: 0 4px 25px rgba(37, 211, 102, 0.45);
-      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4);
+      transition: all 0.3s;
     }
 
-    .whatsapp-btn-top:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
+    .hero-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 30px rgba(155, 81, 224, 0.6);
+    }
+
+    .hero-btn-secondary {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      color: #fff;
+      padding: 13px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .hero-btn-secondary:hover {
+      background: rgba(0, 210, 255, 0.15);
+      transform: translateY(-3px);
     }
 
     .container {
@@ -203,7 +265,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
-      margin: 35px auto 45px;
+      margin: 15px auto 45px;
     }
 
     .trust-item {
@@ -268,7 +330,7 @@
     /* Section Headings */
     .section-header {
       text-align: center;
-      margin: 50px 0 25px;
+      margin: 55px 0 25px;
     }
 
     .section-header h2 {
@@ -485,13 +547,11 @@
       color: #fff;
       cursor: pointer;
       position: relative;
-      overflow: hidden;
     }
 
     .video-thumbnail-box i {
       font-size: 2.7rem;
       color: var(--logo-cyan);
-      animation: pulsePlay 2.5s infinite ease-in-out;
     }
 
     .video-tag {
@@ -505,7 +565,6 @@
       font-weight: 800;
       padding: 3px 10px;
       border-radius: 12px;
-      letter-spacing: 0.5px;
     }
 
     .video-card h4 {
@@ -613,6 +672,92 @@
       background: var(--logo-cyan);
       color: #000;
       box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+    }
+
+    /* Live Interactive Review System */
+    .review-system-box {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 20px;
+      padding: 30px 20px;
+      margin: 45px auto 20px;
+      max-width: 850px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .star-select {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 12px 0 18px;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .star-select i {
+      color: #475569;
+      transition: color 0.2s;
+    }
+
+    .star-select i.active {
+      color: #f59e0b;
+      filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));
+    }
+
+    .review-form input, .review-form textarea {
+      width: 100%;
+      background: rgba(4, 7, 17, 0.7);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .review-form input:focus, .review-form textarea:focus {
+      border-color: var(--logo-cyan);
+    }
+
+    .review-cards-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .user-review-card {
+      background: rgba(6, 11, 24, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .user-review-card .rev-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .user-review-card .user-name {
+      font-weight: 700;
+      color: #f8fafc;
+      font-size: 0.98rem;
+    }
+
+    .user-review-card .stars {
+      color: #f59e0b;
+      font-size: 0.82rem;
+    }
+
+    .user-review-card .rev-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.4;
     }
 
     /* FAQ Section */
@@ -737,31 +882,74 @@
       border: 1px solid rgba(37, 211, 102, 0.35);
       box-shadow: 0 0 15px rgba(37, 211, 102, 0.15);
     }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: rgba(4, 7, 17, 0.95);
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero-banner h1 {
+        font-size: 2.1rem;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="ambient-bg"></div>
 
-  <!-- Header -->
-  <header data-aos="fade-down" data-aos-duration="1000">
-    <div class="logo-container">
-      <img src="logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-      <div class="logo-fallback" style="display:none;">TM</div>
-    </div>
-    
-    <h1>Tools Market</h1>
-
-    <!-- হাইলাইটেড ব্যানার টেক্সট -->
-    <div class="tagline-box">
-      <span class="main-highlight">”প্রিমিয়াম ডিজিটাল টুলস ও ভেরিফাইড সার্ভিস মার্কেটপ্লেস”</span>
-      <span class="sub-highlight">আপনার বিশ্বাস ও নির্ভরযোগ্যতাই আমাদের মূল লক্ষ্য</span>
-    </div>
-
-    <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20Tools%20Market%20এর%20সার্ভিস%20সম্পর্কে%20জানতে%20চাই।" target="_blank" class="whatsapp-btn-top">
-      <i class="fab fa-whatsapp" style="font-size: 1.25rem;"></i> সরাসরি হোয়াটসঅ্যাপে কথা বলুন
+  <!-- Sticky Navbar -->
+  <nav class="navbar">
+    <a href="#" class="nav-brand">
+      <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
+      <span>Tools Market</span>
     </a>
-  </header>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#popular">টুলস</a></li>
+      <li><a href="#combo">কম্বো প্যাকেজ</a></li>
+      <li><a href="#services">সার্ভিসেস</a></li>
+      <li><a href="#video">ভিডিও পোর্টফোলিও</a></li>
+      <li><a href="#reviews">রিভিউ</a></li>
+    </ul>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20Tools%20Market%20এর%20সার্ভিস%20সম্পর্কে%20জানতে%20চাই।" target="_blank" class="nav-wa-btn">
+        <i class="fab fa-whatsapp"></i> অর্ডার করুন
+      </a>
+      <button class="menu-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner" data-aos="fade-down" data-aos-duration="1000">
+    <div class="hero-badge">
+      <i class="fas fa-bolt"></i> প্রিমিয়াম ডিজিটাল টুলস ও ভেরিফাইড সার্ভিস মার্কেটপ্লেস
+    </div>
+    <h1>আপনার ডিজিটাল কাজকে করুন আরও সহজ ও প্রফেশনাল</h1>
+    <p>
+      সেরা মূল্যে এআই টুলস, স্টাডি ও থিসিস কম্বো, মেটা ভেরিফিকেশন, ফলোয়ার গ্রোথ এবং হাই-কনভার্টিং প্রমোশনাল ভিডিও মেকিং সার্ভিস—সবকিছু এক বিশ্বস্ত প্ল্যাটফর্মে।
+    </p>
+    <div class="hero-actions">
+      <a href="#combo" class="hero-btn-primary"><i class="fas fa-gift"></i> প্যাকেজ সমূহ দেখুন</a>
+      <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20সরাসরি%20প্যাকেজ%20সম্পর্কে%20কথা%20বলতে%20চাই।" target="_blank" class="hero-btn-secondary">
+        <i class="fab fa-whatsapp"></i> সরাসরি চ্যাট করুন
+      </a>
+    </div>
+  </section>
 
   <div class="container">
 
@@ -807,7 +995,7 @@
     </div>
 
     <!-- সেকশন ১: মোস্ট পপুলার ৩টি টুলস -->
-    <div class="category-block cat-popular">
+    <div class="category-block cat-popular" id="popular">
       <div class="section-header" data-aos="fade-up">
         <h2>🔥 মোস্ট পপুলার প্রিমিয়াম টুলস</h2>
       </div>
@@ -865,7 +1053,7 @@
 
 
     <!-- সেকশন ২: স্পেশাল কম্বো প্যাকেজ সমূহ -->
-    <div class="category-block cat-combo">
+    <div class="category-block cat-combo" id="combo">
       <div class="section-header" data-aos="fade-up">
         <h2>💎 স্পেশাল কম্বো প্যাকেজ (Study, Thesis & Research)</h2>
       </div>
@@ -951,13 +1139,13 @@
 
 
     <!-- সেকশন ৩: বিশেষ সিঙ্গেল ও সিকিউরিটি সার্ভিস -->
-    <div class="category-block cat-service">
+    <div class="category-block cat-service" id="services">
       <div class="section-header" data-aos="fade-up">
         <h2>🛡️ স্পেশাল সিঙ্গেল AI ও সিকিউরিটি সার্ভিস</h2>
       </div>
 
       <div class="grid">
-        <!-- New Service: Professional Business Page Setup -->
+        <!-- Professional Business Page Setup -->
         <div class="card-wrapper" data-aos="fade-up" data-aos-delay="100">
           <div class="card">
             <span class="tag purple">💼 বিজনেস সল্যুশন</span>
@@ -1068,8 +1256,8 @@
     </div>
 
 
-    <!-- সেকশন ৪: প্রমোশনাল ভিডিও কনটেন্ট সার্ভিস (Client Works Showcase) -->
-    <div class="category-block cat-video">
+    <!-- সেকশন ৪: প্রমোশনাল ভিডিও কনটেন্ট সার্ভিস -->
+    <div class="category-block cat-video" id="video">
       <div class="section-header" data-aos="fade-up">
         <h2>🎬 প্রমোশনাল ভিডিও সার্ভিস (আমাদের ক্লায়েন্টদের সফল কাজ)</h2>
       </div>
@@ -1080,7 +1268,6 @@
         </p>
 
         <div class="video-grid">
-          <!-- Video 1 -->
           <div class="video-card" data-aos="fade-up" data-aos-delay="100">
             <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/1DhimH7tZH/', '_blank')">
               <span class="video-tag">CLIENT WORK</span>
@@ -1094,7 +1281,6 @@
             </a>
           </div>
 
-          <!-- Video 2 -->
           <div class="video-card" data-aos="fade-up" data-aos-delay="200">
             <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/1JvMFHMbJQ/', '_blank')">
               <span class="video-tag">CLIENT WORK</span>
@@ -1108,7 +1294,6 @@
             </a>
           </div>
 
-          <!-- Video 3 -->
           <div class="video-card" data-aos="fade-up" data-aos-delay="300">
             <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/1CKR7R8boB/', '_blank')">
               <span class="video-tag">CLIENT WORK</span>
@@ -1122,7 +1307,6 @@
             </a>
           </div>
 
-          <!-- Video 4 -->
           <div class="video-card" data-aos="fade-up" data-aos-delay="400">
             <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/19qc5DamWW/', '_blank')">
               <span class="video-tag">CLIENT WORK</span>
@@ -1136,7 +1320,6 @@
             </a>
           </div>
 
-          <!-- Video 5 -->
           <div class="video-card" data-aos="fade-up" data-aos-delay="500">
             <div class="video-thumbnail-box" onclick="window.open('https://www.facebook.com/share/r/1G2hGrPAXg/', '_blank')">
               <span class="video-tag">CLIENT WORK</span>
@@ -1160,10 +1343,10 @@
     </div>
 
 
-    <!-- কাস্টমার রিভিউ স্লাইডার সেকশন -->
-    <div class="reviews-section" data-aos="zoom-in" data-aos-duration="900">
+    <!-- কাস্টমার রিভিউ স্ক্রিনশট স্লাইডার -->
+    <div class="reviews-section" id="reviews" data-aos="zoom-in" data-aos-duration="900">
       <div class="section-header">
-        <h2>🌟 কাস্টমারদের সন্তুষ্টি ও রিভিউ</h2>
+        <h2>🌟 ক্লায়েন্ট ফিডব্যাক ও প্রুফ</h2>
       </div>
 
       <div class="slider-container">
@@ -1178,6 +1361,51 @@
       <div class="slider-nav">
         <button class="slider-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
         <button class="slider-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+
+    <!-- ইন্টারেক্টিভ ৫-স্টার লাইভ রিভিউ ফর্ম ও ডিসপ্লে সেকশন -->
+    <div class="review-system-box" data-aos="fade-up">
+      <h3 style="text-align: center; font-size: 1.4rem; color: #fff; margin-bottom: 6px;">
+        ✍️ আপনার মূল্যবান মতামত ও স্টার রেটিং দিন
+      </h3>
+      <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+        Tools Market থেকে সার্ভিস নিয়ে আপনার কেমন লেগেছে তা শেয়ার করুন:
+      </p>
+
+      <div class="star-select" id="starContainer">
+        <i class="fas fa-star active" onclick="setRating(1)"></i>
+        <i class="fas fa-star active" onclick="setRating(2)"></i>
+        <i class="fas fa-star active" onclick="setRating(3)"></i>
+        <i class="fas fa-star active" onclick="setRating(4)"></i>
+        <i class="fas fa-star active" onclick="setRating(5)"></i>
+      </div>
+
+      <form class="review-form" onsubmit="submitUserReview(event)">
+        <input type="text" id="reviewerName" placeholder="আপনার নাম লিখুন..." required>
+        <textarea id="reviewerFeedback" rows="3" placeholder="সার্ভিস কেমন লেগেছে বিস্তারিত লিখুন..." required></textarea>
+        <button type="submit" class="order-btn" style="border: none; cursor: pointer;">
+          <i class="fas fa-paper-plane"></i> রিভিউ পোস্ট করুন
+        </button>
+      </form>
+
+      <!-- লাইভ রিভিউ কার্ডের তালিকা -->
+      <div class="review-cards-list" id="reviewCardsList">
+        <div class="user-review-card">
+          <div class="rev-head">
+            <span class="user-name">মাহমুদুল হাসান</span>
+            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+          </div>
+          <p class="rev-text">গোল্ডেন প্যাকেজ নিয়েছিলাম। টার্নিটিন আর চ্যাটজিপিটি স্মুথলি কাজ করছে। মাত্র ১০ মিনিটে ডেলিভারি পেয়েছি!</p>
+        </div>
+        <div class="user-review-card">
+          <div class="rev-head">
+            <span class="user-name">তানভীর আহমেদ</span>
+            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+          </div>
+          <p class="rev-text">ক্যানভা প্রো পার্সোনাল মেইলে এক্টিভ করে দিয়েছে। তাদের দ্রুত রেসপন্স ও সাপোর্ট খুবই অসাধারণ।</p>
+        </div>
       </div>
     </div>
 
@@ -1257,6 +1485,11 @@
       offset: 50
     });
 
+    // Mobile Navbar Toggle
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+
     // Review Slider
     let currentSlide = 0;
     const track = document.getElementById('sliderTrack');
@@ -1281,10 +1514,55 @@
     // FAQ Accordion
     document.querySelectorAll('.faq-question').forEach(item => {
       item.addEventListener('click', () => {
-        const parent = item.parentElement;
-        parent.classList.toggle('active');
+        item.parentElement.classList.toggle('active');
       });
     });
+
+    // Interactive Star Rating Logic
+    let selectedRating = 5;
+    function setRating(rating) {
+      selectedRating = rating;
+      const stars = document.querySelectorAll('#starContainer i');
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    }
+
+    // Submit User Review Handler
+    function submitUserReview(e) {
+      e.preventDefault();
+      const name = document.getElementById('reviewerName').value;
+      const feedback = document.getElementById('reviewerFeedback').value;
+
+      let starIcons = '';
+      for (let i = 0; i < selectedRating; i++) {
+        starIcons += '<i class="fas fa-star"></i>';
+      }
+
+      const newCard = document.createElement('div');
+      newCard.className = 'user-review-card';
+      newCard.innerHTML = `
+        <div class="rev-head">
+          <span class="user-name">${name}</span>
+          <span class="stars">${starIcons}</span>
+        </div>
+        <p class="rev-text">${feedback}</p>
+      `;
+
+      document.getElementById('reviewCardsList').prepend(newCard);
+
+      // WhatsApp Backup Notification
+      const waText = encodeURIComponent(`🌟 নতুন ওয়েবসাইট রিভিউ!\nনাম: ${name}\nরেটিং: ${selectedRating} স্টার\nরিভিউ: ${feedback}`);
+      window.open(`https://wa.me/8801820232076?text=${waText}`, '_blank');
+
+      alert('ধন্যবাদ! আপনার মূল্যবান রিভিউটি সফলভাবে ওয়েবসাইটে প্রদর্শিত হয়েছে।');
+      e.target.reset();
+      setRating(5);
+    }
 
     // Filter Functionality
     function filterItems(category) {
@@ -1323,10 +1601,9 @@
         video.style.display = 'block';
       }
       
-      // Refresh AOS positions after filtering
       AOS.refresh();
     }
   </script>
 
 </body>
-      </html>
+</html>

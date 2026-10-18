@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tools Market - প্রিমিয়াম ডিজিটাল টুলস ও সার্ভিস মার্কেটপ্লেস</title>
   
+  <!-- Complete SEO Meta Tags -->
+  <meta name="description" content="Tools Market - বাংলাদেশের সবচেয়ে বিশ্বস্ত ডিজিটাল টুলস মার্কেটপ্লেস। এআই টুলস, থিসিস ও স্টাডি কম্বো, ক্যানভা প্রো, ক্যাপকাট, মেটা ভেরিফিকেশন ও প্রমোশনাল ভিডিও মেকিং সার্ভিস।">
+  <meta name="keywords" content="Tools Market, Digital Tools BD, AI Tools Bangladesh, ChatGPT Plus, Canva Pro, CapCut Pro, Study Combo, Turnitin, Meta Verification, Follower Service, Video Ads Making">
+  <meta name="author" content="Tools Market">
+  <meta property="og:title" content="Tools Market - প্রিমিয়াম ডিজিটাল টুলস ও সার্ভিস মার্কেটপ্লেস">
+  <meta property="og:description" content="সবচেয়ে সাশ্রয়ী মূল্যে প্রিমিয়াম এআই টুলস, কম্বো প্যাকেজ ও ডিজিটাল সার্ভিস। ইনস্ট্যান্ট ডেলিভারি ও ফুল রিপ্লেসমেন্ট ওয়ারেন্টি।">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+
   <!-- Google Fonts: Hind Siliguri -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,6 +95,13 @@
         opacity: 1;
         transform: translateY(0) scale(1);
       }
+    }
+
+    @keyframes liveToastSlide {
+      0% { transform: translateX(-120%); opacity: 0; }
+      15% { transform: translateX(0); opacity: 1; }
+      85% { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(-120%); opacity: 0; }
     }
 
     /* Sticky Navbar */
@@ -871,6 +887,11 @@
       box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
     }
 
+    .pay-btn-badge.bkash-merchant:hover {
+      border-color: #e2136e;
+      box-shadow: 0 6px 20px rgba(226, 19, 110, 0.55);
+    }
+
     .pay-btn-badge.bkash:hover {
       border-color: #e2136e;
       box-shadow: 0 6px 20px rgba(226, 19, 110, 0.4);
@@ -991,6 +1012,50 @@
       margin-bottom: 5px;
     }
 
+    /* Live Social Proof Toast */
+    .live-sales-toast {
+      position: fixed;
+      bottom: 25px;
+      left: 20px;
+      background: rgba(11, 17, 33, 0.95);
+      border: 1px solid rgba(0, 210, 255, 0.5);
+      padding: 12px 18px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      z-index: 998;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-120%);
+    }
+
+    .live-sales-toast.show {
+      animation: liveToastSlide 6s ease-in-out forwards;
+    }
+
+    .toast-icon {
+      font-size: 1.4rem;
+      color: var(--logo-cyan);
+    }
+
+    .toast-text {
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      line-height: 1.3;
+    }
+
+    .toast-text strong {
+      color: #fff;
+      display: block;
+    }
+
+    .toast-time {
+      font-size: 0.75rem;
+      color: var(--whatsapp-green);
+    }
+
     /* Floating WhatsApp Button */
     .floating-wa {
       position: fixed;
@@ -1056,6 +1121,9 @@
       .hero-banner h1 {
         font-size: 2.1rem;
       }
+      .live-sales-toast {
+        display: none; /* Hide on small mobile to avoid blocking content */
+      }
     }
   </style>
 </head>
@@ -1063,7 +1131,7 @@
 
   <div class="ambient-bg"></div>
 
-  <!-- Sticky Navbar (আপডেট করা হেডার লিংক সহ) -->
+  <!-- Sticky Navbar -->
   <nav class="navbar">
     <a href="#" class="nav-brand">
       <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
@@ -1137,7 +1205,7 @@
       </div>
     </div>
 
-    <!-- ক্যাটাগরি ফিল্টার বাটন (আপডেট করা) -->
+    <!-- ক্যাটাগরি ফিল্টার বাটন -->
     <div class="filter-tabs" data-aos="fade-up">
       <button class="filter-btn active" onclick="filterItems('all')">সবগুলো</button>
       <button class="filter-btn" onclick="filterItems('popular')">🔥 পপুলার টুলস</button>
@@ -1267,7 +1335,7 @@
           </div>
         </div>
 
-        <!-- PLATINUM PACKAGE -->
+        <!-- PLATINUM PACKAGE (আপডেট করা পয়েন্ট সহ) -->
         <div class="card-wrapper" data-aos="fade-up" data-aos-delay="400">
           <div class="card">
             <span class="tag purple">🚀 আল্টিমেট কম্বো</span>
@@ -1280,7 +1348,10 @@
               <li><i class="fas fa-check-circle"></i> হিক্স বাইপাস ও কুইলবট প্রিমিয়াম</li>
               <li><i class="fas fa-check-circle"></i> গ্রামারলি ও পারপ্লেক্সিটি প্রো (ডীপ রিসার্চ)</li>
               <li><i class="fas fa-check-circle"></i> পেপারপাল প্রাইম ও জেনি এ আই</li>
-              <li><i class="fas fa-gift"></i> সাথে আরো স্পেশাল বোনাস টুলস!</li>
+              <li><i class="fas fa-bolt" style="color: #00d2ff;"></i> গ্রোক সুপার (Grok Super)</li>
+              <li><i class="fas fa-graduation-cap" style="color: #c471ed;"></i> স্কিলশেয়ার (Skillshare)</li>
+              <li><i class="fas fa-crown" style="color: #fbbf24;"></i> ক্যানভা প্রো (Canva Pro)</li>
+              <li><i class="fas fa-gift" style="color: #f43f5e;"></i> সাথে আরো স্পেশাল আকর্ষণীয় বোনাস টুলস!</li>
             </ul>
             <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20Tools%20Market%20থেকে%20PLATINUM%20PACKAGE%20(৭৯৯৳)%20অর্ডার%20করতে%20চাই।" target="_blank" class="order-btn">অর্ডার করুন</a>
           </div>
@@ -1289,7 +1360,7 @@
     </div>
 
 
-    <!-- সেকশন ৩: বিশেষ সিঙ্গেল ও সিকিউরিটি সার্ভিস (ওটিপি প্ল্যান মুছে দেওয়া হয়েছে) -->
+    <!-- সেকশন ৩: বিশেষ সিঙ্গেল ও সিকিউরিটি সার্ভিস -->
     <div class="category-block cat-service" id="services">
       <div class="section-header" data-aos="fade-up">
         <h2>🛡️ স্পেশাল সিঙ্গেল AI ও সিকিউরিটি সার্ভিস</h2>
@@ -1588,12 +1659,15 @@
     </div>
 
 
-    <!-- ইন্টারেক্টিভ পেমেন্ট মেথড সেকশন -->
+    <!-- ইন্টারেক্টিভ পেমেন্ট মেথড সেকশন (বিকাশ মার্চেন্ট সহ) -->
     <div class="payment-section" data-aos="fade-up">
       <h3 style="font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 4px;">💳 পেমেন্ট মেথড সমূহ</h3>
       <p style="color: var(--text-muted); font-size: 0.95rem;">পেমেন্ট ইনফরমেশন ও নম্বর দেখতে যেকোনো মেথডে ক্লিক করুন</p>
       
       <div class="payment-badges">
+        <div class="pay-btn-badge bkash-merchant" onclick="openPaymentModal('bkash_merchant')">
+          <i class="fas fa-store" style="color: #e2136e; font-size: 1.25rem;"></i> bKash (বিকাশ মার্চেন্ট)
+        </div>
         <div class="pay-btn-badge bkash" onclick="openPaymentModal('bkash')">
           <i class="fas fa-wallet" style="color: #e2136e; font-size: 1.25rem;"></i> bKash (বিকাশ পার্সনাল)
         </div>
@@ -1624,7 +1698,7 @@
       </div>
 
       <ul class="modal-instructions" id="modalInstructions">
-        <li>উপরে দেওয়া নম্বরে <strong>Send Money (সেন্ড মানি)</strong> করুন।</li>
+        <li>উপরে দেওয়া নম্বরে <strong>Send Money / Make Payment</strong> করুন।</li>
         <li>টাকা পাঠানোর পর ট্রানজাকশন আইডি (TrxID) বা শেষ ৪ ডিজিট সংরক্ষণ করুন।</li>
         <li>নিচের বাটনে চাপ দিয়ে সরাসরি হোয়াটসঅ্যাপে পেমেন্টের স্ক্রিনশট বা তথ্য পাঠিয়ে কনফার্ম করুন।</li>
       </ul>
@@ -1632,6 +1706,16 @@
       <a href="https://wa.me/8801820232076?text=আসসালামু%20আলাইকুম,%20আমি%20পেমেন্ট%20করেছি।" target="_blank" class="order-btn" style="text-decoration: none;">
         <i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপে পেমেন্ট প্রুফ পাঠান
       </a>
+    </div>
+  </div>
+
+  <!-- লাইভ সোশ্যাল প্রুফ সেলস টোস্ট (Social Proof Toast) -->
+  <div class="live-sales-toast" id="liveSalesToast">
+    <div class="toast-icon"><i class="fas fa-shopping-bag"></i></div>
+    <div class="toast-text">
+      <strong id="toastUser">আব্দুল্লাহ (ঢাকা)</strong>
+      <span id="toastPackage">Golden Package অর্ডার করেছেন</span>
+      <div class="toast-time" id="toastTime">২ মিনিট আগে</div>
     </div>
   </div>
 
@@ -1737,7 +1821,6 @@
         starIcons += '<i class="fas fa-star"></i>';
       }
 
-      // Create & prepend new card
       const newCard = document.createElement('div');
       newCard.className = 'user-review-card';
       newCard.innerHTML = `
@@ -1767,7 +1850,7 @@
 
     document.addEventListener('DOMContentLoaded', loadSavedReviews);
 
-    // Payment Modal Logic
+    // Payment Modal Logic (বিকাশ মার্চেন্ট সহ)
     let activeCopyNumber = '';
 
     function openPaymentModal(type) {
@@ -1775,25 +1858,52 @@
       const logo = document.getElementById('modalLogo');
       const title = document.getElementById('modalTitle');
       const numDisplay = document.getElementById('modalNumber');
+      const instructions = document.getElementById('modalInstructions');
       const copyBtn = document.getElementById('copyBtn');
 
       copyBtn.innerHTML = '<i class="fas fa-copy"></i> কপি করুন';
 
-      if (type === 'bkash') {
+      if (type === 'bkash_merchant') {
+        logo.innerHTML = '<i class="fas fa-store" style="color: #e2136e;"></i>';
+        title.innerText = 'বিকাশ মার্চেন্ট পেমেন্ট';
+        activeCopyNumber = '01820232076';
+        numDisplay.innerText = '01820232076';
+        instructions.innerHTML = `
+          <li>বিকাশ অ্যাপে গিয়ে <strong>Payment (পেমেন্ট করুন)</strong> অপশন সিলেক্ট করুন।</li>
+          <li>মার্চেন্ট নম্বর হিসেবে <strong>01820232076</strong> লিখুন এবং নির্ধারিত টাকা সেন্ড করুন।</li>
+          <li>পেমেন্ট সফল হলে ট্রানজাকশন আইডি (TrxID) বা শেষ ৪ ডিজিট সংরক্ষণ করুন।</li>
+          <li>নিচের বাটনে চাপ দিয়ে সরাসরি হোয়াটসঅ্যাপে পেমেন্ট প্রুফ পাঠান।</li>
+        `;
+      } else if (type === 'bkash') {
         logo.innerHTML = '<i class="fas fa-wallet" style="color: #e2136e;"></i>';
         title.innerText = 'বিকাশ পার্সোনাল পেমেন্ট';
         activeCopyNumber = '01738592385';
         numDisplay.innerText = '01738592385';
+        instructions.innerHTML = `
+          <li>উপরে দেওয়া নম্বরে <strong>Send Money (সেন্ড মানি)</strong> করুন।</li>
+          <li>টাকা পাঠানোর পর ট্রানজাকশন আইডি (TrxID) বা শেষ ৪ ডিজিট সংরক্ষণ করুন।</li>
+          <li>নিচের বাটনে চাপ দিয়ে সরাসরি হোয়াটসঅ্যাপে পেমেন্টের স্ক্রিনশট বা তথ্য পাঠিয়ে কনফার্ম করুন।</li>
+        `;
       } else if (type === 'nagad') {
         logo.innerHTML = '<i class="fas fa-mobile-alt" style="color: #f7941d;"></i>';
         title.innerText = 'নগদ পার্সোনাল পেমেন্ট';
         activeCopyNumber = '01925164394';
         numDisplay.innerText = '01925164394';
+        instructions.innerHTML = `
+          <li>উপরে দেওয়া নম্বরে নগদ থেকে <strong>Send Money (সেন্ড মানি)</strong> করুন।</li>
+          <li>টাকা পাঠানোর পর ট্রানজাকশন আইডি (TrxID) বা শেষ ৪ ডিজিট সংরক্ষণ করুন।</li>
+          <li>নিচের বাটনে চাপ দিয়ে সরাসরি হোয়াটসঅ্যাপে পেমেন্টের স্ক্রিনশট বা তথ্য পাঠিয়ে কনফার্ম করুন।</li>
+        `;
       } else if (type === 'rocket') {
         logo.innerHTML = '<i class="fas fa-university" style="color: #8c3494;"></i>';
         title.innerText = 'রকেট ও অন্যান্য মেথড';
         activeCopyNumber = '01738592385';
         numDisplay.innerText = '01738592385';
+        instructions.innerHTML = `
+          <li>উপরে দেওয়া নম্বরে রকেট থেকে <strong>Send Money (সেন্ড মানি)</strong> করুন।</li>
+          <li>টাকা পাঠানোর পর ট্রানজাকশন আইডি (TrxID) বা শেষ ৪ ডিজিট সংরক্ষণ করুন।</li>
+          <li>অন্যান্য ব্যাংক ট্রান্সফারের জন্য সরাসরি হোয়াটসঅ্যাপে যোগাযোগ করুন।</li>
+        `;
       }
 
       overlay.style.display = 'flex';
@@ -1859,6 +1969,36 @@
       
       AOS.refresh();
     }
+
+    // Dynamic Live Sales Notification (Social Proof)
+    const salesData = [
+      { user: 'রাকিবুল হাসান (ঢাকা)', package: 'Golden Package অর্ডার করেছেন', time: '৪ মিনিট আগে' },
+      { user: 'মাহফুজুর রহমান (চট্টগ্রাম)', package: 'Canva Pro (১ বছর) নিয়েছেন', time: '৭ মিনিট আগে' },
+      { user: 'তানভীর আহমেদ (সিলেট)', package: 'Platinum Package অর্ডার করেছেন', time: '২ মিনিট আগে' },
+      { user: 'সামিয়া ইসলাম (রাজশাহী)', package: 'AI Master Package নিয়েছেন', time: '১২ মিনিট আগে' },
+      { user: 'হাসান ইমাম (খুলনা)', package: 'Gemini AI Pro নিয়েছেন', time: '৫ মিনিট আগে' }
+    ];
+
+    let salesIndex = 0;
+    function triggerSalesToast() {
+      const toast = document.getElementById('liveSalesToast');
+      if (!toast) return;
+
+      const item = salesData[salesIndex];
+      document.getElementById('toastUser').innerText = item.user;
+      document.getElementById('toastPackage').innerText = item.package;
+      document.getElementById('toastTime').innerText = item.time;
+
+      toast.classList.remove('show');
+      void toast.offsetWidth; // trigger reflow
+      toast.classList.add('show');
+
+      salesIndex = (salesIndex + 1) % salesData.length;
+    }
+
+    // Show social proof notification every 18 seconds
+    setInterval(triggerSalesToast, 18000);
+    setTimeout(triggerSalesToast, 4000);
   </script>
 
 </body>
